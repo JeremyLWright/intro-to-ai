@@ -39,7 +39,7 @@ capacity(luge, 2).
 
 sled(first, innerTube1).
 sled(second, toboggan).
-:- sled(fifth, innerTube1).
+
 
 1 { sled(O, V) : vehicle(V) } 1 :- order(O). % For every order, sled a vehicle once
 
