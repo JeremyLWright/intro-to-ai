@@ -8,7 +8,7 @@
 % inner tubes). Some vehicles contained only one person, while others held
 % two-riders. The seven enjoyed their brief time alone on Harrier Hill, but it
 % wasn’t long before a blizzard of other sledders joined them! From the
-% information provided, determine the other in which each vehicle sledded down
+% information provided, determine the order in which each vehicle sledded down
 % the snowy slope and the rider or riders who sat in each vehicle.
 %
 % 1.	Each of the two inner tubes (one of which was the first down the slope) had only one rider.
