@@ -29,7 +29,7 @@
 
 
 sleds(innerTube1;toboggan;luge;innerTube2;plasticSled).
-persons(xerxes;blake;vanessa;kira;ollie).
+persons(xerxes;blakeFlynn;vanessa;kiraOllie;regan).
 
 order(1..5).
 % Generate
@@ -58,6 +58,13 @@ d3 :-
     went(luge, T1),
     T1 < T2.
 
+% #4 
+% Kira and Ollie  went immediately before Regan.
+d4 :-
+    sled(kiraOllie, T1),
+    sled(regan, T2),
+    T2 = T1 + 1.
+   
 
 % Print solution
 sol(T, Person, Sled) :- sled(Person, T), went(Sled, T).
