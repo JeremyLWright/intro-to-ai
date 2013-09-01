@@ -25,23 +25,31 @@
 % 4th, inner tube 2, Regan
 % 5th, plastic sled, Vanessa
 % 
-rider(xerxes;blake;flynn;kira;ollie;regan;vanessa).
+rider(xerxes;blake;flynn;kira;ollie). %regan;vanessa).
 vehicle(innerTube1;toboggan;luge;innerTube2;plasticSled).
-order(first;second;third;forth;fifth).
-
-owner(vanessa,plasticSled).
-
-capacity(innerTube1, 1).
-capacity(innerTube2, 1).
-capacity(toboggan, 2).
-capacity(plasticSled, 1).
-capacity(luge, 2).
-
-sled(first, innerTube1).
-sled(second, toboggan).
 
 
-1 { sled(O, V) : vehicle(V) } 1 :- order(O). % For every order, sled a vehicle once
+
+
+%Generate
+
+1 { sled(T, V) } 1 :- vehicle(V), T = 1..5. %At each time point T, 1 vehicle goes
+
+sled(1, innerTube1).
+sled(2, toboggan).
+%owner(vanessa,plasticSled).
+%
+%capacity(innerTube1, 1).
+%capacity(innerTube2, 1).
+%capacity(toboggan, 2).
+%capacity(plasticSled, 1).
+%capacity(luge, 2).
+%
+%sled(first, innerTube1).
+%sled(second, toboggan).
+%
+%
+%1 { sled(O, V) : vehicle(V) } 1 :- order(O). % For every order, sled a vehicle once
 
 #hide rider/1.
 #hide vehicle/1.
