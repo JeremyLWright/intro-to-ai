@@ -64,7 +64,10 @@ d4 :-
     sled(kiraOllie, T1),
     sled(regan, T2),
     T2 = T1 + 1.
-   
+
+% #5
+% Blake went in not an innertube.
+d5 :- sled(blakeFlynn, T) , not went(innerTube2, T).
 
 % Print solution
 sol(T, Person, Sled) :- sled(Person, T), went(Sled, T).
