@@ -33,10 +33,15 @@ vehicle(innerTube1;toboggan;luge;innerTube2;plasticSled).
 
 %Generate
 
-1 { sled(T, V) } 1 :- vehicle(V), T = 1..5. %At each time point T, 1 vehicle goes
-
+1 { sled(T, V) } 1 :- vehicle(V), T = 1..5. %At each time point T, 1 vehicle goes.
+1 { on(R, V) : rider(R) } 1 :- vehicle(V) % For every vehicle, a rider rode "on" it once.
+% Define
 sled(1, innerTube1).
 sled(2, toboggan).
+
+% Test
+
+
 %owner(vanessa,plasticSled).
 %
 %capacity(innerTube1, 1).
