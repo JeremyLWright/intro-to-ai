@@ -1,4 +1,15 @@
+% Homework #2 - CSE 471/CSE598
+% Jeremy Wright
+% I referenced the following sites while working on this assignment:
+%  - http://www.youtube.com/watch?v=n2Wz9oKpZjs
+%  - http://www.hakank.org/asp/
+%  - http://potassco.sourceforge.net/labs.html
+%  - http://peace.eas.asu.edu/aaai12tutorial/asp-tutorial-aaai.pdf
+%  - https://www.csupomona.edu/~jrfisher/www/prolog_tutorial/contents.html
+%  - http://www.csci.csusb.edu/dick/samples/prolog.html
+%
 % Snow Motion
+%
 % 
 % Most winters, you’ll find the majority of Townsville over Harrier Hill,
 % enjoying the snowfall. From the early morning until just after dusk, people
@@ -25,9 +36,6 @@
 % 4th, inner tube 2, Regan
 % 5th, plastic sled, Vanessa
 % 
-% Reference: http://www.hakank.org/asp/
-
-
 sleds(innerTube1;toboggan;luge;innerTube2;plasticSled).
 persons(xerxes;blake_and_Flynn;vanessa;kira_and_Ollie;regan).
 
