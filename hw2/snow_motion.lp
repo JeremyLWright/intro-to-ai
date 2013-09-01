@@ -32,19 +32,34 @@ sleds(innerTube1;toboggan;luge;innerTube2;plasticSled).
 persons(xerxes;blake;vanessa;kira;ollie).
 
 order(1..5).
-
-% all differents
+% Generate
+%
 1 { went(Sled, T) : order(T) } 1 :- sleds(Sled).
 1 { went(Sled, T) : sleds(Sled)} 1 :- order(T).
 
-1 { sled(P, T) : order(T) } 1 :- sled(P).
+1 { sled(P, T) : order(T) } 1 :- persons(P).
 1 { sled(P, T) : persons(P)} 1 :- order(T).
 
-% vanessa sled on the plastic sled
-d1 :- 
-    went(plasticSled, T),
-    sled(vanessa, T).
+% #1
+% innerTube1 was the first went first
+went(innerTube1, 1).
 
+% #2
+% The toboggan went second.
+went(toboggan, 2).
+
+% #3
+% vanessa sled on the plastic sled at some time T2
+% the luge went down some time T1 
+% where T1 is before T2
+d3 :- 
+    went(plasticSled, T2),
+    sled(vanessa, T2),
+    went(luge, T1),
+    T1 < T2.
+
+
+% Print solution
 sol(T, Person, Sled) :- sled(Person, T), went(Sled, T).
 
 #hide.
