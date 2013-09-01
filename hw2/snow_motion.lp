@@ -29,7 +29,7 @@
 
 
 sleds(innerTube1;toboggan;luge;innerTube2;plasticSled).
-persons(xerxes;blakeFlynn;vanessa;kiraOllie;regan).
+persons(xerxes;blake_and_Flynn;vanessa;kira_and_Ollie;regan).
 
 order(1..5).
 % Generate
@@ -39,6 +39,10 @@ order(1..5).
 
 1 { sled(P, T) : order(T) } 1 :- persons(P).
 1 { sled(P, T) : persons(P)} 1 :- order(T).
+
+% story paragraph
+% Xerxes went first
+sled(xerxes, 1).
 
 % #1
 % innerTube1 was the first went first
@@ -63,18 +67,18 @@ d3 :-
 % #4 
 % Kira and Ollie  went immediately before Regan.
 d4 :-
-    sled(kiraOllie, T1),
+    sled(kira_and_Ollie, T1),
     sled(regan, T2),
     T2 = T1 + 1.
 :- not d4.
 
 % #5
 % Blake went in not an innertube.
-d5 :- sled(blakeFlynn, T) , not went(innerTube2, T).
+d5 :- sled(blake_and_Flynn, T) , not went(innerTube2, T).
 :- not d5.
 
 % Print solution
 sol(T, Person, Sled) :- sled(Person, T), went(Sled, T).
 
-%#hide.
+#hide.
 #show sol(T, Person, Sled).
