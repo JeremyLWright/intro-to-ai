@@ -51,12 +51,14 @@ went(toboggan, 2).
 % #3
 % vanessa sled on the plastic sled at some time T2
 % the luge went down some time T1 
-% where T1 is before T2
+% where T1 is before T2, but not immediate
 d3 :- 
     went(plasticSled, T2),
     sled(vanessa, T2),
     went(luge, T1),
-    T1 < T2.
+    T1 < T2,
+    T2 != T1 + 1.
+:- not d3.
 
 % #4 
 % Kira and Ollie  went immediately before Regan.
@@ -64,13 +66,15 @@ d4 :-
     sled(kiraOllie, T1),
     sled(regan, T2),
     T2 = T1 + 1.
+:- not d4.
 
 % #5
 % Blake went in not an innertube.
 d5 :- sled(blakeFlynn, T) , not went(innerTube2, T).
+:- not d5.
 
 % Print solution
 sol(T, Person, Sled) :- sled(Person, T), went(Sled, T).
 
-#hide.
+%#hide.
 #show sol(T, Person, Sled).
