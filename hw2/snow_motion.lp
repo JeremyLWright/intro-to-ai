@@ -25,50 +25,27 @@
 % 4th, inner tube 2, Regan
 % 5th, plastic sled, Vanessa
 % 
-rider(xerxes;blake;flynn;kira;ollie). %regan;vanessa).
-vehicle(innerTube1;toboggan;luge;innerTube2;plasticSled).
+% Reference: http://www.hakank.org/asp/
 
 
+sleds(innerTube1;toboggan;luge;innerTube2;plasticSled).
+persons(xerxes;blake;vanessa;kira;ollie).
 
+order(1..5).
 
-%Generate
+% all differents
+1 { went(Sled, T) : order(T) } 1 :- sleds(Sled).
+1 { went(Sled, T) : sleds(Sled)} 1 :- order(T).
 
-1 { sled(T, V) } 1 :- vehicle(V), T = 1..5. %At each time point T, 1 vehicle goes.
-1 { on(R, V) : rider(R) } 1 :- vehicle(V) % For every vehicle, a rider rode "on" it once.
-% Define
-sled(1, innerTube1).
-sled(2, toboggan).
+1 { sled(P, T) : order(T) } 1 :- sled(P).
+1 { sled(P, T) : persons(P)} 1 :- order(T).
 
-% Test
+% vanessa sled on the plastic sled
+d1 :- 
+    went(plasticSled, T),
+    sled(vanessa, T).
 
+sol(T, Person, Sled) :- sled(Person, T), went(Sled, T).
 
-%owner(vanessa,plasticSled).
-%
-%capacity(innerTube1, 1).
-%capacity(innerTube2, 1).
-%capacity(toboggan, 2).
-%capacity(plasticSled, 1).
-%capacity(luge, 2).
-%
-%sled(first, innerTube1).
-%sled(second, toboggan).
-%
-%
-%1 { sled(O, V) : vehicle(V) } 1 :- order(O). % For every order, sled a vehicle once
-
-#hide rider/1.
-#hide vehicle/1.
-#hide order/1.
-% sled(Xerxes,plasticSled).
-% sled(Blake,plasticSled).
-% sled(Flynn,plasticSled).
-% sled(Kira,plasticSled).
-% sled(Ollie,plasticSled).
-% sled(Regan,plasticSled).
-
-%1 { sled(Rider, V) : rider(Rider) } 1 :- vehicle(V).
-%sled(X, innerTube1) :- rider(X).
-%sled(X, innerTube2) :- rider(X).
-%1 { sled(Rider, innerTube1) } 1 :- vehicle(innerTube1).
-%1 { sled(Rider, innerTube2) } 1 :- vehicle(innerTube2).
-%1 { sled(Rider, V) : rider(Rider) } 1 :- vehicle(V).
+#hide.
+#show sol(T, Person, Sled).
