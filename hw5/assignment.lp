@@ -36,7 +36,6 @@ need_reviewer(X) :- reviewer(X).
 %Translate the following the sentence:
 %1. A paper needs more reviewer(s) if and only if is it has not been reviewed by at least three different reviewers.
 %% A paper needs more reviews if is have been reviewed by less than three reviewers.
-%2. A paper is rejected if and only if it has not been positively reviewed by two different reviewers.
 
 prob1a(P) :- paper(P), result(R), review(greg, P, R).
 prob1b(P) :- paper(P), result(R), review(justin, P, R).
@@ -45,5 +44,11 @@ prob1c(P) :- paper(P), result(R), review(jarred, P, R).
 nprob1(P) :- prob1a(P), prob1b(P), prob1c(P), paper(P).
 prob1(P) :- not nprob1(P), paper(P).
 
+
+%2. A paper is rejected if and only if it has not been positively reviewed by two different reviewers.
+% a paper is rejected if it has not been positively reviewed twice
+prob2(P) :- paper(P), review(X1, P, positive), review(X2, P, positive), reviewer(X1), reviewer(X2), X1 != X2.
+
 #hide.
 #show prob1(P).
+#show prob2(P).
