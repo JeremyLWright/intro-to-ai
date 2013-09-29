@@ -16,8 +16,8 @@ time(0..3).
 alive(0).
 nloaded(0).
 
-load(0). %the action load happens at time point 0.
-shoot(1).
+%load(0). %the action load happens at time point 0.
+%shoot(1).
 
 loaded(T) :- not nloaded(T), time(T). %Closed world assumption, if the gun is not loaded, it is loaded
 dead(T) :- not alive(T), time(T). % Closed world assumption.
@@ -42,6 +42,15 @@ alive(T + 1) :- alive(T), time(T), not ab(alive, T + 1).
 nloaded(T+1) :- nloaded(T), time(T), not ab(nloaded, T+1).
 
 ab(nloaded, T+1) :- load(T), nloaded(T), time(T).
+
+%% Goal: Turkey should be dead at time point 2.
+%% Find out what actions need to happen at time point 0, and 1.
+
+% Enumerate the possiblites (at a time point, an action can happen)
+1 { load(T), shoot(T)} 1 :- time(T).
+
+%Goal (as a constraint)
+:- alive(2).
 
 #hide time(X).
 #hide ab(X,Y).
