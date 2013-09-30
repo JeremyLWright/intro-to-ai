@@ -9,40 +9,12 @@ cubes(1;4;7).
 x(X, Y, N) :- index(X;Y), number(N), not nx(X,Y, N).
 nx(X, Y, N) :- index(X;Y), number(N), not x(X,Y, N).
 
-%% At every location does or does not have a 2 in it.
-%x(X, Y, 2) :- index(X;Y), not nx(X,Y, 2).
-%nx(X, Y, 2) :- index(X;Y), not x(X,Y, 2).
-%
-%% At every location does or does not have a 3 in it.
-%x(X, Y, 3) :- index(X;Y), not nx(X,Y, 3).
-%nx(X, Y, 3) :- index(X;Y), not x(X,Y, 3).
-%
-%% At every location does or does not have a 4 in it.
-%x(X, Y, 4) :- index(X;Y), not nx(X,Y, 4).
-%nx(X, Y, 4) :- index(X;Y), not x(X,Y, 4).
-%
-%% At every location does or does not have a 5 in it.
-%x(X, Y, 5) :- index(X;Y), not nx(X,Y, 5).
-%nx(X, Y, 5) :- index(X;Y), not x(X,Y, 5).
-%
-%% At every location does or does not have a 6 in it.
-%x(X, Y, 6) :- index(X;Y), not nx(X,Y, 6).
-%nx(X, Y, 6) :- index(X;Y), not x(X,Y, 6).
-%
-%% At every location does or does not have a 7 in it.
-%x(X, Y, 7) :- index(X;Y), not nx(X,Y, 7).
-%nx(X, Y, 7) :- index(X;Y), not x(X,Y, 7).
-%
-%% At every location does or does not have a 8 in it.
-%x(X, Y, 8) :- index(X;Y), not nx(X,Y, 8).
-%nx(X, Y, 8) :- index(X;Y), not x(X,Y, 8).
-%
-%% At every location does or does not have a 9 in it.
-%x(X, Y, 9) :- index(X;Y), not nx(X,Y, 9).
-%nx(X, Y, 9) :- index(X;Y), not x(X,Y, 9).
 
+% No row has the same number
+:- x(X, Y1, N), x(X,Y2, N), index(X;Y1;Y2), number(N), Y1!=Y2.
+:- x(X1, Y, N), x(X2,Y, N), index(X1;X2;Y), number(N), X1!=X2.
+%:- x(X, Y1, N1), x(X,Y2, N2), index(Y1;Y2;X), N1!=N2, Y1!=Y2.
 
-% alldifferent boxes
 %1 { x(X,Y,N) : 
 %    number(X;Y):
 %    CubeX <= X:
@@ -69,5 +41,5 @@ nx(X, Y, N) :- index(X;Y), number(N), not x(X,Y, N).
 %% :- 2 { x(X,Y,N) : number(X) }, number(N;Y).
 %% :- 2 { x(X,Y,N) : number(Y) }, number(N;X). 
 %
-%#hide.
-%#show x/3.
+#hide.
+#show x/3.
