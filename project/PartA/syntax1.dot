@@ -1,0 +1,4 @@
+digraph syntax1_1 {
+    "Rename Data (N)" -> "Rename (N/N)"
+    "Rename Data (N)" -> "data (N)"
+}

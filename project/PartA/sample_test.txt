@@ -1,0 +1,3 @@
+Generate all preservation_attributes	command > generate(preservation_attributes)
+Print report listing all changes to rules	command > print(report) ^ list(report,changes(rules))
+List all people with staff_experience report	command > list(people) ^ have(people,report(staff_experience))

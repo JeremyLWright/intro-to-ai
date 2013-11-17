@@ -1,0 +1,3 @@
+Tdata=../PartA/sample_test.txt
+Tdictionary=../PartA/sample_policy_out.txt
+Tsyntax=../PartA/sample_syntax.txt

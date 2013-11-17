@@ -1,0 +1,4 @@
+Rename data	command > rename(data)
+Print financial audit_report	command > print(audit_report(finance))
+Generate report listing all preservation_attributes	command > generate(report(list(preservation_attributes)))
+Transfer data to new storage	command > transfer(data, storage(new))

@@ -1,0 +1,3 @@
+sentence=Transfer data to new storage
+syntaxFile=./examples/sample/syntax.txt
+

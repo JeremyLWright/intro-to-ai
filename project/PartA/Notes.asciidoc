@@ -1,0 +1,322 @@
+Sentence 1
+----------
+Grammar for Rename data (1)
+[source,python,numbered]
+---------------------------------------------------------------------
+Tree number 1:
+nl2kr_token("t_1","Rename","(N/N)",-1) #<1>
+nl2kr_child_left("t_3","t_1")
+nl2kr_token("t_3","Rename data","N",-1) 
+nl2kr_token("t_2","data","N",-1) #<2>
+nl2kr_child_right("t_3","t_2")
+nl2kr_valid_rootNode("t_3")
+
+Tree number 2:
+nl2kr_token("t_3","Rename data","((S\\NP)\\((S\\NP)/NP))",-1)
+nl2kr_token("t_1","Rename","(N/N)",-1) #<1>
+nl2kr_child_left("t_4","t_1")
+nl2kr_child_left("t_3","t_1")
+nl2kr_token("t_4","Rename data","N",-1)
+nl2kr_child_right("t_4","t_2")
+nl2kr_token("t_2","data","N",-1) #<2>
+nl2kr_child_right("t_3","t_2")
+nl2kr_valid_rootNode("t_3")
+nl2kr_valid_rootNode("t_4")
+
+Tree number 3:
+nl2kr_token("t_1","Rename","(N/N)",-1) #<1>
+nl2kr_child_left("t_4","t_1")
+nl2kr_child_left("t_3","t_1")
+nl2kr_token("t_3","Rename data","(S\\(S/NP))",-1)
+nl2kr_token("t_4","Rename data","N",-1)
+nl2kr_child_right("t_4","t_2")
+nl2kr_token("t_2","data","N",-1) #<2>
+nl2kr_child_right("t_3","t_2")
+nl2kr_valid_rootNode("t_3")
+nl2kr_valid_rootNode("t_4")
+---------------------------------------------------------------------
+
+ <1> CCG Grammar for Rename agrees across 3 parse trees
+ <2> CCG Grammar for _data_ agrees across 3 parse trees
+
+The first graph makes logical sense:
+[graphviz]
+----------
+digraph syntax1 {
+    "Rename Data (N)" -> "Rename (N/N)"
+    "Rename Data (N)" -> "data (N)"
+}
+-----------
+
+Each CCG of the indivudal words agree so we added this to the syntax file.
+[source,python]
+---------------------------------------------------------------------
+Rename  (N/N)
+data    (N)
+---------------------------------------------------------------------
+And add to our training document
+[source,python]
+---------------------------------------------------------------------
+Rename data	command > rename(data)
+---------------------------------------------------------------------
+
+Sentence 2
+----------
+Next sentence we do the same thing
+[source,python]
+-------------
+sentence=Print financial audit_report
+syntaxFile=./examples/sample/syntax.txt
+-------------
+
+Which generates the following output
+[source,python]
+-------------
+Tree number 1:
+nl2kr_token("t_5","Print financial audit_report","N",-1)
+nl2kr_token("t_4","financial audit_report","N",-1)
+nl2kr_child_left("t_4","t_1")
+nl2kr_token("t_3","Print","(N/N)",-1)
+nl2kr_valid_rootNode("t_5")
+nl2kr_child_right("t_5","t_4")
+nl2kr_child_right("t_4","t_2")
+nl2kr_token("t_1","financial","(N/N)",-1)
+nl2kr_token("t_2","audit_report","N",-1)
+nl2kr_child_left("t_5","t_3")
+
+Tree number 2:
+nl2kr_token("t_5","Print financial audit_report","N",-1)
+nl2kr_child_right("t_4","t_3")
+nl2kr_child_right("t_5","t_1")
+nl2kr_child_left("t_5","t_4")
+nl2kr_token("t_4","Print financial","(N/N)",-1)
+nl2kr_child_left("t_4","t_2")
+nl2kr_valid_rootNode("t_5")
+nl2kr_token("t_1","audit_report","N",-1)
+nl2kr_token("t_3","financial","(N/N)",-1)
+nl2kr_token("t_2","Print","((N/N)/(N/N))",-1)
+
+Tree number 3:
+nl2kr_token("t_4","financial audit_report","N",-1)
+nl2kr_token("t_5","Print financial audit_report","NP",-1)
+nl2kr_child_right("t_4","t_1")
+nl2kr_token("t_2","Print","(NP/N)",-1)
+nl2kr_valid_rootNode("t_5")
+nl2kr_child_left("t_4","t_3")
+nl2kr_child_right("t_5","t_4")
+nl2kr_token("t_1","audit_report","N",-1)
+nl2kr_token("t_3","financial","(N/N)",-1)
+nl2kr_child_left("t_5","t_2")
+---------------------------
+
+The first tree makes sense
+[graphviz]
+----------
+digraph { graph[ordering="out"]
+"Print financial audit_report (N)" -> "Print (N/N)"
+"Print financial audit_report (N)" -> "financial audit_report (N)"
+"financial audit_report (N)" -> "financial (N/N)"
+"financial audit_report (N)" -> "audit_report (N)"
+}
+----------
+
+So we apped to our grammar file
+[source,python]
+---------------------------------------------------------------------
+Print  (N/N)
+financial    (N/N)
+audit_report (N)
+---------------------------------------------------------------------
+And add to our training document
+[source,python]
+---------------------------------------------------------------------
+Print financial audit_report	command > print(audit_report(finance))
+---------------------------------------------------------------------
+
+Sentence 3
+----------
+
+Next sequence we do the same thing
+[source,python]
+--------------
+sentence=Generate report listing all preservation_attributes
+syntaxFile=./examples/sample/syntax.txt
+--------------
+
+Which generates the following output
+[source,python]
+---------------
+Tree number 1:
+nl2kr_token("t_6","Generate report","N",-1)
+nl2kr_token("t_9","Generate report listing all preservation_attributes","S",-1)
+nl2kr_child_right("t_8","t_7")
+nl2kr_token("t_5","Generate","(N/N)",-1)
+nl2kr_token("t_2","preservation_attributes","N",-1)
+nl2kr_child_left("t_7","t_1")
+nl2kr_child_left("t_6","t_5")
+nl2kr_child_left("t_8","t_4")
+nl2kr_token("t_1","all","(NP/N)",-1)
+nl2kr_child_right("t_7","t_2")
+nl2kr_child_right("t_9","t_8")
+nl2kr_token("t_7","all preservation_attributes","NP",-1)
+nl2kr_token("t_3","report","N",-1)
+nl2kr_token("t_4","listing","((S\\NP)/NP)",-1)
+nl2kr_child_left("t_9","t_6")
+nl2kr_child_right("t_6","t_3")
+nl2kr_token("t_8","listing all preservation_attributes","(S\\NP)",-1)
+nl2kr_valid_rootNode("t_9")
+------------------
+
+The tree makes sense
+[graphviz]
+-----------------
+digraph { graph[ordering="out"]
+
+"9 Generate report listing all preservation_attributes (S)" -> "6 Generate report (N)"
+"9 Generate report listing all preservation_attributes (S)" -> "8 listing all preservation_attributes (S\\NP)"
+
+"6 Generate report (N)" -> "5 Generate (N/N)"
+"6 Generate report (N)" -> "3 report (N)"
+
+"8 listing all preservation_attributes (S\\NP)" -> "4 listing ((S\\NP)/NP)"
+"8 listing all preservation_attributes (S\\NP)" -> "7 all preservation_attributes (NP)"
+
+"7 all preservation_attributes (NP)" -> "1 all (NP/N)"
+"7 all preservation_attributes (NP)" -> "2 preservation_attributes (N)"
+}
+--------------------
+
+So we append to our grammar file
+[source,python]
+---------------------
+Generate (N/N)
+report (N)
+listing ((S\\NP)/NP)
+all (NP/N)
+preservation_attributes (N)
+--------------------
+
+And add to our training document
+[source,python]
+--------------------
+Generate report listing all preservation_attributes	command > generate(report(list(preservation_attributes)))
+--------------------
+
+Sentence 4
+----------
+Next sentence
+
+[source, python]
+----------------
+sentence=Transfer data to new storage
+syntaxFile=./examples/sample/syntax.txt
+---------------
+
+Which generates the following output
+[source,python]
+---------------
+Tree number 1:
+nl2kr_token("t_5","Transfer","(N/N)",-1)
+nl2kr_child_right("t_8","t_7")
+nl2kr_child_left("t_9","t_5")
+nl2kr_token("t_1","storage","N",-1)
+nl2kr_token("t_8","data to new storage","N",-1)
+nl2kr_token("t_3","new","(N/N)",-1)
+nl2kr_child_left("t_6","t_3")
+nl2kr_child_left("t_7","t_4")
+nl2kr_token("t_2","data","(N/N)",-1)
+nl2kr_token("t_6","new storage","N",-1)
+nl2kr_child_right("t_6","t_1")
+nl2kr_child_right("t_9","t_8")
+nl2kr_token("t_7","to new storage","N",-1)
+nl2kr_token("t_4","to","(N/N)",-1)
+nl2kr_child_right("t_7","t_6")
+nl2kr_child_left("t_8","t_2")
+nl2kr_token("t_9","Transfer data to new storage","N",-1)
+nl2kr_valid_rootNode("t_9")
+
+Tree number 2:
+nl2kr_token("t_5","Transfer","(N/N)",-1)
+nl2kr_token("t_3","data","N",-1)
+nl2kr_token("t_8","to new storage","(NP\\NP)",-1)
+nl2kr_child_left("t_8","t_1")
+nl2kr_child_left("t_6","t_5")
+nl2kr_token("t_7","new storage","N",-1)
+nl2kr_token("t_2","storage","N",-1)
+nl2kr_token("t_9","Transfer data to new storage","NP",-1)
+nl2kr_child_right("t_7","t_2")
+nl2kr_child_left("t_7","t_4")
+nl2kr_token("t_6","Transfer data","N",-1)
+nl2kr_token("t_1","to","((NP\\NP)/NP)",-1)
+nl2kr_child_right("t_8","t_7")
+nl2kr_child_left("t_9","t_6")
+nl2kr_token("t_4","new","(N/N)",-1)
+nl2kr_child_right("t_6","t_3")
+nl2kr_child_right("t_9","t_8")
+nl2kr_valid_rootNode("t_9")
+------------------
+
+The tree makes sense
+[graphviz]
+------------------
+digraph {graph[ordering="out"]
+
+
+"9 Transfer data to new storage N" -> "5 Transfer (N/N)"
+"9 Transfer data to new storage N" -> "8 data to new storage N"
+
+"8 data to new storage N" -> "2 data (N/N)"
+"8 data to new storage N" -> "7 to new storage N"
+
+"7 to new storage N" -> "4 to (N/N)"
+"7 to new storage N" -> "6 new storage N"
+
+"6 new storage N" -> "3 new (N/N)"
+"6 new storage N" -> "1 storage N"
+}
+--------------------
+
+So we append to our grammar file
+[source,python]
+-------------------
+Transfer (N/N)
+data (N/N)
+to (N/N)
+new (N/N)
+storage (N)
+-------------------
+
+
+
+Building Lambda Definitions
+---------------------------
+Using the defined command parsing, we can infer the function
+application
+[source,python]
+-----------------
+print(audit_report(finance))
+-----------------
+
+We can reverse the lambda function application to get the root
+expressions
+[source,python,numbered]
+----------------
+print(audit_report(finance))
+print(\f.audit_report(f)@finance)
+\a.print(a)@\f.(audit_report(f)@finance
+----------------
+Thus the individual expressions are
+[source,python,numbered]
+----------------
+#x.print(x)
+#x.audit_report(x)
+finance
+----------------
+Which we can add to our dictionary file.
+[source,python,numbered]
+-------------------
+print (N/N) #x.print(x)
+financial (N/N) financial
+audit_report (N) #x.audit_report(x)
+-------------------
+

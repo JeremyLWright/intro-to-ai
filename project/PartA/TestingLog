@@ -1,0 +1,48 @@
+******Reading test data: ../PartA/sample_test.txt
+Test line: 0
+Test line: 1
+Test line: 2
+******Reading lexicon file: ../PartA/sample_policy_out.txt
+Line[0] Syntax:[[(NP/NP)\NP]] Semantics:[#x.x]
+Line[1] Syntax:[[NP/N]] Semantics:[staff_experience]
+Line[2] Syntax:[[N]] Semantics:[collection]
+Line[3] Syntax:[[N]] Semantics:[people]
+Line[4] Syntax:[[N]] Semantics:[rules]
+Line[5] Syntax:[[S/NP]] Semantics:[#x.command > print(x)]
+Line[6] Syntax:[[(S\NP)/NP]] Semantics:[#x.command > print(x)]
+Line[7] Syntax:[[N]] Semantics:[#x.access_permission(x)]
+Line[8] Syntax:[[N]] Semantics:[#x.audit_trail(x)]
+Line[9] Syntax:[[(NP/NP)\NP]] Semantics:[#x.x]
+Line[10] Syntax:[[(S\NP)/N]] Semantics:[#x.command > list(x)]
+Line[11] Syntax:[[(S\NP)/NP]] Semantics:[#x.command > generate(x)]
+Line[12] Syntax:[[N/N]] Semantics:[#x.x]
+Line[13] Syntax:[[N]] Semantics:[preservation_attributes]
+TestingProcess: 3 testing data read.
+******Parsing Sentences ...
+Parsing test sentence: Generate all preservation_attributes
+Expected Representation: command > generate(preservation_attributes)
+java.io.FileNotFoundException: resources/aspccgtk-parser/output/output_Generate_all_preservation_attributes.asp (No such file or directory)
+	at java.io.FileInputStream.open(Native Method)
+	at java.io.FileInputStream.<init>(FileInputStream.java:137)
+	at java.io.FileInputStream.<init>(FileInputStream.java:96)
+	at java.io.FileReader.<init>(FileReader.java:58)
+	at bioai.ccgprocessor.ccgparsing.aspccgtkParser.ASPCCGTKWrapper.callASPCCGParser(ASPCCGTKWrapper.java:185)
+	at bioai.ccgprocessor.ccgparsing.aspccgtkParser.ASPCCGParser.parse(ASPCCGParser.java:32)
+	at bioai.ccgprocessor.pccg.parser.PCCGParser.parseTable(PCCGParser.java:172)
+	at bioai.ccgprocessor.pccg.parser.PCCGParser.parse(PCCGParser.java:251)
+	at bioai.ccgprocessor.translation.TranslationProcess.testPair(TranslationProcess.java:196)
+	at bioai.ccgprocessor.translation.TranslationProcess.test(TranslationProcess.java:112)
+	at bioai.ccgprocessor.tests.scripts.NL2KR_TTest.main(NL2KR_TTest.java:90)
+java.lang.NullPointerException
+	at bioai.ccgprocessor.ccgparsing.aspccgtkParser.ASPCCGParser.parse(ASPCCGParser.java:37)
+	at bioai.ccgprocessor.pccg.parser.PCCGParser.parseTable(PCCGParser.java:172)
+	at bioai.ccgprocessor.pccg.parser.PCCGParser.parse(PCCGParser.java:251)
+	at bioai.ccgprocessor.translation.TranslationProcess.testPair(TranslationProcess.java:196)
+	at bioai.ccgprocessor.translation.TranslationProcess.test(TranslationProcess.java:112)
+	at bioai.ccgprocessor.tests.scripts.NL2KR_TTest.main(NL2KR_TTest.java:90)
+java.lang.NullPointerException
+	at bioai.ccgprocessor.pccg.parser.PCCGParser.parse(PCCGParser.java:252)
+	at bioai.ccgprocessor.translation.TranslationProcess.testPair(TranslationProcess.java:196)
+	at bioai.ccgprocessor.translation.TranslationProcess.test(TranslationProcess.java:112)
+	at bioai.ccgprocessor.tests.scripts.NL2KR_TTest.main(NL2KR_TTest.java:90)
+rm: cannot remove `./resources/aspccgtk-parser/examples_supertagged/*.asp': No such file or directory

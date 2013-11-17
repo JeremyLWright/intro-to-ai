@@ -1,0 +1,3 @@
+sentence=Rename data
+syntaxFile=./examples/sample/syntax.txt
+

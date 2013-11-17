@@ -1,0 +1,12 @@
+audit_trail	N	#x. audit_trail(x)
+all	N/N	#x.x
+rules	N	rules
+preservation_attributes	N	preservation_attributes
+List	(S\NP)/N	#x.command > list(x)
+people	N	people
+access_permissions	N	#x.access_permission(x)
+collection	N	collection
+Print	(S\NP)/NP	#x.command > print(x)
+Print	S/NP	#x.command > print(x)
+staff_experience	NP/N	staff_experience
+to	(NP/NP)\NP	#x.x
