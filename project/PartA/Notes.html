@@ -919,7 +919,7 @@ http://www.gnu.org/software/src-highlite -->
 <img src="Notes__3.png" alt="Notes__3.png" />
 </div>
 </div>
-<div class="paragraph"><p>So we append to our grammar file</p></div>
+<div class="paragraph"><p>So we append to our syntax file</p></div>
 <div class="listingblock">
 <div class="content"><!-- Generator: GNU source-highlight 3.1.6
 by Lorenzo Bettini
@@ -1001,6 +1001,79 @@ Tree number <span style="color: #993399">2</span><span style="color: #990000">:<
 <img src="Notes__4.png" alt="Notes__4.png" />
 </div>
 </div>
+<div class="paragraph"><p>So we append to our syntax file</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.6
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="font-weight: bold"><span style="color: #000000">Transfer</span></span> <span style="color: #990000">(</span>N<span style="color: #990000">/</span>N<span style="color: #990000">)</span>
+<span style="font-weight: bold"><span style="color: #000000">data</span></span> <span style="color: #990000">(</span>N<span style="color: #990000">/</span>N<span style="color: #990000">)</span>
+<span style="font-weight: bold"><span style="color: #000000">to</span></span> <span style="color: #990000">(</span>N<span style="color: #990000">/</span>N<span style="color: #990000">)</span>
+<span style="font-weight: bold"><span style="color: #000000">new</span></span> <span style="color: #990000">(</span>N<span style="color: #990000">/</span>N<span style="color: #990000">)</span>
+<span style="font-weight: bold"><span style="color: #000000">storage</span></span> <span style="color: #990000">(</span>N<span style="color: #990000">)</span></tt></pre></div></div>
+<div class="paragraph"><p>And add to our training document</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.6
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt>Transfer data to new storage    command <span style="color: #990000">&gt;</span> <span style="font-weight: bold"><span style="color: #000000">transfer</span></span><span style="color: #990000">(</span>data<span style="color: #990000">,</span> <span style="font-weight: bold"><span style="color: #000000">storage</span></span><span style="color: #990000">(</span>new<span style="color: #990000">))</span></tt></pre></div></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_sentence_5">Sentence 5</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.6
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt>sentence<span style="color: #990000">=</span>Generate report on risk
+syntaxFile<span style="color: #990000">=./</span>examples<span style="color: #990000">/</span>sample<span style="color: #990000">/</span>syntax<span style="color: #990000">.</span>txt</tt></pre></div></div>
+<div class="paragraph"><p>Which generates the following output</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.6
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="font-weight: bold"><span style="color: #000000">l2kr_child_right</span></span><span style="color: #990000">(</span><span style="color: #FF0000">"t_5"</span><span style="color: #990000">,</span><span style="color: #FF0000">"t_1"</span><span style="color: #990000">)</span>
+<span style="font-weight: bold"><span style="color: #000000">nl2kr_child_left</span></span><span style="color: #990000">(</span><span style="color: #FF0000">"t_5"</span><span style="color: #990000">,</span><span style="color: #FF0000">"t_4"</span><span style="color: #990000">)</span>
+<span style="font-weight: bold"><span style="color: #000000">nl2kr_token</span></span><span style="color: #990000">(</span><span style="color: #FF0000">"t_6"</span><span style="color: #990000">,</span><span style="color: #FF0000">"on risk"</span><span style="color: #990000">,</span><span style="color: #FF0000">"(N\\N)"</span><span style="color: #990000">,-</span><span style="color: #993399">1</span><span style="color: #990000">)</span>
+<span style="font-weight: bold"><span style="color: #000000">nl2kr_token</span></span><span style="color: #990000">(</span><span style="color: #FF0000">"t_3"</span><span style="color: #990000">,</span><span style="color: #FF0000">"risk"</span><span style="color: #990000">,</span><span style="color: #FF0000">"N"</span><span style="color: #990000">,-</span><span style="color: #993399">1</span><span style="color: #990000">)</span>
+<span style="font-weight: bold"><span style="color: #000000">nl2kr_token</span></span><span style="color: #990000">(</span><span style="color: #FF0000">"t_7"</span><span style="color: #990000">,</span><span style="color: #FF0000">"Generate report on risk"</span><span style="color: #990000">,</span><span style="color: #FF0000">"N"</span><span style="color: #990000">,-</span><span style="color: #993399">1</span><span style="color: #990000">)</span>
+<span style="font-weight: bold"><span style="color: #000000">nl2kr_token</span></span><span style="color: #990000">(</span><span style="color: #FF0000">"t_4"</span><span style="color: #990000">,</span><span style="color: #FF0000">"Generate"</span><span style="color: #990000">,</span><span style="color: #FF0000">"(N/N)"</span><span style="color: #990000">,-</span><span style="color: #993399">1</span><span style="color: #990000">)</span>
+<span style="font-weight: bold"><span style="color: #000000">nl2kr_token</span></span><span style="color: #990000">(</span><span style="color: #FF0000">"t_2"</span><span style="color: #990000">,</span><span style="color: #FF0000">"on"</span><span style="color: #990000">,</span><span style="color: #FF0000">"((N\\N)/NP)"</span><span style="color: #990000">,-</span><span style="color: #993399">1</span><span style="color: #990000">)</span>
+<span style="font-weight: bold"><span style="color: #000000">nl2kr_token</span></span><span style="color: #990000">(</span><span style="color: #FF0000">"t_1"</span><span style="color: #990000">,</span><span style="color: #FF0000">"report"</span><span style="color: #990000">,</span><span style="color: #FF0000">"N"</span><span style="color: #990000">,-</span><span style="color: #993399">1</span><span style="color: #990000">)</span>
+<span style="font-weight: bold"><span style="color: #000000">nl2kr_child_left</span></span><span style="color: #990000">(</span><span style="color: #FF0000">"t_7"</span><span style="color: #990000">,</span><span style="color: #FF0000">"t_5"</span><span style="color: #990000">)</span>
+<span style="font-weight: bold"><span style="color: #000000">nl2kr_valid_rootNode</span></span><span style="color: #990000">(</span><span style="color: #FF0000">"t_7"</span><span style="color: #990000">)</span>
+<span style="font-weight: bold"><span style="color: #000000">nl2kr_child_right</span></span><span style="color: #990000">(</span><span style="color: #FF0000">"t_7"</span><span style="color: #990000">,</span><span style="color: #FF0000">"t_6"</span><span style="color: #990000">)</span>
+<span style="font-weight: bold"><span style="color: #000000">nl2kr_child_left</span></span><span style="color: #990000">(</span><span style="color: #FF0000">"t_6"</span><span style="color: #990000">,</span><span style="color: #FF0000">"t_2"</span><span style="color: #990000">)</span>
+<span style="font-weight: bold"><span style="color: #000000">nl2kr_child_right</span></span><span style="color: #990000">(</span><span style="color: #FF0000">"t_6"</span><span style="color: #990000">,</span><span style="color: #FF0000">"t_3"</span><span style="color: #990000">)</span>
+<span style="font-weight: bold"><span style="color: #000000">nl2kr_token</span></span><span style="color: #990000">(</span><span style="color: #FF0000">"t_5"</span><span style="color: #990000">,</span><span style="color: #FF0000">"Generate report"</span><span style="color: #990000">,</span><span style="color: #FF0000">"N"</span><span style="color: #990000">,-</span><span style="color: #993399">1</span><span style="color: #990000">)</span></tt></pre></div></div>
+<div class="paragraph"><p>The tree makes sense</p></div>
+<div class="imageblock graphviz">
+<div class="content">
+<img src="Notes__5.png" alt="Notes__5.png" />
+</div>
+</div>
+<div class="paragraph"><p>So we append to our grammar gile</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.6
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="font-weight: bold"><span style="color: #000000">Generate</span></span> <span style="color: #990000">(</span>N<span style="color: #990000">/</span>N<span style="color: #990000">)</span>
+report N
+<span style="font-weight: bold"><span style="color: #000000">on</span></span> <span style="color: #990000">((</span>N<span style="color: #990000">\\</span>N<span style="color: #990000">)/</span>NP<span style="color: #990000">)</span>
+risk N</tt></pre></div></div>
+<div class="paragraph"><p>And add to our training file</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.6
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt>Generate report on risk command <span style="color: #990000">&gt;</span> <span style="font-weight: bold"><span style="color: #000000">generate</span></span><span style="color: #990000">(</span><span style="font-weight: bold"><span style="color: #000000">report</span></span><span style="color: #990000">(</span>risk<span style="color: #990000">))</span></tt></pre></div></div>
 </div>
 </div>
 <div class="sect1">
@@ -1044,11 +1117,169 @@ http://www.gnu.org/software/src-highlite -->
 <span style="color: #000000">    3:</span> <span style="font-weight: bold"><span style="color: #000000">audit_report</span></span> <span style="color: #990000">(</span>N<span style="color: #990000">)</span> <span style="font-style: italic"><span style="color: #9A1900">#x.audit_report(x)</span></span></tt></pre></div></div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="_learning">Learning</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Learning Configuration</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.6
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="color: #009900">Ldata</span><span style="color: #990000">=..</span>/PartA/wright_train<span style="color: #990000">.</span>txt
+<span style="color: #009900">Ldictionary</span><span style="color: #990000">=..</span>/PartA/wright_dict<span style="color: #990000">.</span>txt
+<span style="color: #009900">Lsyntax</span><span style="color: #990000">=..</span>/PartA/wright_syntax<span style="color: #990000">.</span>txt
+<span style="color: #009900">Loutput</span><span style="color: #990000">=..</span>/PartA/wright_train<span style="color: #990000">.</span>out</tt></pre></div></div>
+<div class="paragraph"><p>After corecting a few syntax errors in the dictionary file, generates
+the following lexicon file</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.6
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt>financial       <span style="color: #990000">[</span>N<span style="color: #990000">/</span>N<span style="color: #990000">]</span>   financial       <span style="color: #993399">0.01</span>
+to      <span style="color: #990000">[</span>N<span style="color: #990000">/</span>N<span style="color: #990000">]</span>   to      <span style="color: #993399">0.01</span>
+data    <span style="color: #990000">[</span>N<span style="color: #990000">/</span>N<span style="color: #990000">]</span>   data    <span style="color: #993399">0.01</span>
+data    <span style="color: #990000">[</span>N<span style="color: #990000">]</span>     data    <span style="color: #993399">0.01</span>
+audit_report    <span style="color: #990000">[</span>N<span style="color: #990000">]</span>     <span style="font-style: italic"><span style="color: #9A1900">#x.audit_report(x)      0.01</span></span>
+audit_report    <span style="color: #990000">[</span>N<span style="color: #990000">]</span>     audit_report    <span style="color: #993399">0.01</span>
+Print   <span style="color: #990000">[</span>N<span style="color: #990000">/</span>N<span style="color: #990000">]</span>   <span style="font-style: italic"><span style="color: #9A1900">#x.print(x)     0.01</span></span>
+Transfer        <span style="color: #990000">[</span>N<span style="color: #990000">/</span>N<span style="color: #990000">]</span>   <span style="font-style: italic"><span style="color: #9A1900">#x.#y.transfer(x,y)     0.01</span></span>
+risk    <span style="color: #990000">[</span>N<span style="color: #990000">]</span>     risk    <span style="color: #993399">0.01</span>
+Rename  <span style="color: #990000">[</span>N<span style="color: #990000">/</span>N<span style="color: #990000">]</span>   <span style="font-style: italic"><span style="color: #9A1900">#x.rename(x)    0.01</span></span>
+new     <span style="color: #990000">[</span>N<span style="color: #990000">/</span>N<span style="color: #990000">]</span>   new     <span style="color: #993399">0.01</span>
+listing <span style="color: #990000">[(</span>S<span style="color: #990000">\</span>NP<span style="color: #990000">)/</span>NP<span style="color: #990000">]</span>     <span style="font-style: italic"><span style="color: #9A1900">#x.list(x)      0.01</span></span>
+report  <span style="color: #990000">[</span>N<span style="color: #990000">]</span>     <span style="font-style: italic"><span style="color: #9A1900">#x.report(x)    0.01</span></span>
+report  <span style="color: #990000">[</span>N<span style="color: #990000">]</span>     report  <span style="color: #993399">0.01</span>
+Generate        <span style="color: #990000">[</span>N<span style="color: #990000">/</span>N<span style="color: #990000">]</span>   <span style="font-style: italic"><span style="color: #9A1900">#x.generate(x)  0.01</span></span>
+storage <span style="color: #990000">[</span>N<span style="color: #990000">]</span>     storage <span style="color: #993399">0.01</span>
+preservation_attributes <span style="color: #990000">[</span>N<span style="color: #990000">]</span>     preservation_attributes <span style="color: #993399">0.01</span></tt></pre></div></div>
+<div class="paragraph"><p>To which we can test new files.  This resulted in the following error:</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.6
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt>TestingProcess<span style="color: #990000">:</span> <span style="color: #993399">3</span> testing data read<span style="color: #990000">.</span>
+<span style="color: #990000">******</span>Parsing Sentences <span style="color: #990000">...</span>
+Parsing test sentence<span style="color: #990000">:</span> Rename collection
+Expected Representation<span style="color: #990000">:</span> command <span style="color: #990000">&gt;</span> <span style="font-weight: bold"><span style="color: #000000">rename</span></span><span style="color: #990000">(</span>collection<span style="color: #990000">)</span>
+Predicted Result<span style="color: #990000">:</span> command <span style="color: #990000">&gt;</span> <span style="font-weight: bold"><span style="color: #000000">rename</span></span><span style="color: #990000">(</span>collection<span style="color: #990000">)</span>
+Correct Prediction
+
+Parsing test sentence<span style="color: #990000">:</span> Print staff_experience report
+Expected Representation<span style="color: #990000">:</span> command <span style="color: #990000">&gt;</span> <span style="font-weight: bold"><span style="color: #0000FF">print</span></span><span style="color: #990000">(</span><span style="font-weight: bold"><span style="color: #000000">report</span></span><span style="color: #990000">(</span>staff_experience<span style="color: #990000">))</span>
+Predicted Result<span style="color: #990000">:</span> command <span style="color: #990000">&gt;</span> <span style="font-weight: bold"><span style="color: #0000FF">print</span></span><span style="color: #990000">(</span><span style="font-weight: bold"><span style="color: #000000">report</span></span><span style="color: #990000">(</span>staff_experience<span style="color: #990000">))</span>
+Correct Prediction
+
+Parsing test sentence<span style="color: #990000">:</span> Transfer ownership to rods
+Expected Representation<span style="color: #990000">:</span> command <span style="color: #990000">&gt;</span> <span style="font-weight: bold"><span style="color: #000000">transfer</span></span><span style="color: #990000">(</span>ownership<span style="color: #990000">,</span> rods<span style="color: #990000">)</span>
+java<span style="color: #990000">.</span>io<span style="color: #990000">.</span>FileNotFoundException<span style="color: #990000">:</span> resources<span style="color: #990000">/</span>aspccgtk<span style="color: #990000">-</span>parser<span style="color: #990000">/</span>output<span style="color: #990000">/</span>output_Transfer_ownership_to_rods<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">asp</span></span> <span style="color: #990000">(</span>No such file <span style="font-weight: bold"><span style="color: #0000FF">or</span></span> directory<span style="color: #990000">)</span>
+        at java<span style="color: #990000">.</span>io<span style="color: #990000">.</span>FileInputStream<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">open</span></span><span style="color: #990000">(</span>Native Method<span style="color: #990000">)</span>
+        at java<span style="color: #990000">.</span>io<span style="color: #990000">.</span>FileInputStream<span style="color: #990000">.&lt;</span>init<span style="color: #990000">&gt;(</span>FileInputStream<span style="color: #990000">.</span>java<span style="color: #990000">:</span><span style="color: #993399">138</span><span style="color: #990000">)</span>
+        at java<span style="color: #990000">.</span>io<span style="color: #990000">.</span>FileInputStream<span style="color: #990000">.&lt;</span>init<span style="color: #990000">&gt;(</span>FileInputStream<span style="color: #990000">.</span>java<span style="color: #990000">:</span><span style="color: #993399">97</span><span style="color: #990000">)</span>
+        at java<span style="color: #990000">.</span>io<span style="color: #990000">.</span>FileReader<span style="color: #990000">.&lt;</span>init<span style="color: #990000">&gt;(</span>FileReader<span style="color: #990000">.</span>java<span style="color: #990000">:</span><span style="color: #993399">58</span><span style="color: #990000">)</span>
+        at bioai<span style="color: #990000">.</span>ccgprocessor<span style="color: #990000">.</span>ccgparsing<span style="color: #990000">.</span>aspccgtkParser<span style="color: #990000">.</span>ASPCCGTKWrapper<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">callASPCCGParser</span></span><span style="color: #990000">(</span>ASPCCGTKWrapper<span style="color: #990000">.</span>java<span style="color: #990000">:</span><span style="color: #993399">185</span><span style="color: #990000">)</span>
+        at bioai<span style="color: #990000">.</span>ccgprocessor<span style="color: #990000">.</span>ccgparsing<span style="color: #990000">.</span>aspccgtkParser<span style="color: #990000">.</span>ASPCCGParser<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">parse</span></span><span style="color: #990000">(</span>ASPCCGParser<span style="color: #990000">.</span>java<span style="color: #990000">:</span><span style="color: #993399">32</span><span style="color: #990000">)</span>
+        at bioai<span style="color: #990000">.</span>ccgprocessor<span style="color: #990000">.</span>pccg<span style="color: #990000">.</span>parser<span style="color: #990000">.</span>PCCGParser<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">parseTable</span></span><span style="color: #990000">(</span>PCCGParser<span style="color: #990000">.</span>java<span style="color: #990000">:</span><span style="color: #993399">172</span><span style="color: #990000">)</span>
+        at bioai<span style="color: #990000">.</span>ccgprocessor<span style="color: #990000">.</span>pccg<span style="color: #990000">.</span>parser<span style="color: #990000">.</span>PCCGParser<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">parse</span></span><span style="color: #990000">(</span>PCCGParser<span style="color: #990000">.</span>java<span style="color: #990000">:</span><span style="color: #993399">251</span><span style="color: #990000">)</span>
+        at bioai<span style="color: #990000">.</span>ccgprocessor<span style="color: #990000">.</span>translation<span style="color: #990000">.</span>TranslationProcess<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">testPair</span></span><span style="color: #990000">(</span>TranslationProcess<span style="color: #990000">.</span>java<span style="color: #990000">:</span><span style="color: #993399">196</span><span style="color: #990000">)</span>
+        at bioai<span style="color: #990000">.</span>ccgprocessor<span style="color: #990000">.</span>translation<span style="color: #990000">.</span>TranslationProcess<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">test</span></span><span style="color: #990000">(</span>TranslationProcess<span style="color: #990000">.</span>java<span style="color: #990000">:</span><span style="color: #993399">112</span><span style="color: #990000">)</span>
+        at bioai<span style="color: #990000">.</span>ccgprocessor<span style="color: #990000">.</span>tests<span style="color: #990000">.</span>scripts<span style="color: #990000">.</span>NL2KR_TTest<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">main</span></span><span style="color: #990000">(</span>NL2KR_TTest<span style="color: #990000">.</span>java<span style="color: #990000">:</span><span style="color: #993399">90</span><span style="color: #990000">)</span>
+java<span style="color: #990000">.</span>lang<span style="color: #990000">.</span>NullPointerException
+        at bioai<span style="color: #990000">.</span>ccgprocessor<span style="color: #990000">.</span>ccgparsing<span style="color: #990000">.</span>aspccgtkParser<span style="color: #990000">.</span>ASPCCGParser<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">parse</span></span><span style="color: #990000">(</span>ASPCCGParser<span style="color: #990000">.</span>java<span style="color: #990000">:</span><span style="color: #993399">37</span><span style="color: #990000">)</span>
+        at bioai<span style="color: #990000">.</span>ccgprocessor<span style="color: #990000">.</span>pccg<span style="color: #990000">.</span>parser<span style="color: #990000">.</span>PCCGParser<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">parseTable</span></span><span style="color: #990000">(</span>PCCGParser<span style="color: #990000">.</span>java<span style="color: #990000">:</span><span style="color: #993399">172</span><span style="color: #990000">)</span>
+        at bioai<span style="color: #990000">.</span>ccgprocessor<span style="color: #990000">.</span>pccg<span style="color: #990000">.</span>parser<span style="color: #990000">.</span>PCCGParser<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">parse</span></span><span style="color: #990000">(</span>PCCGParser<span style="color: #990000">.</span>java<span style="color: #990000">:</span><span style="color: #993399">251</span><span style="color: #990000">)</span>
+        at bioai<span style="color: #990000">.</span>ccgprocessor<span style="color: #990000">.</span>translation<span style="color: #990000">.</span>TranslationProcess<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">testPair</span></span><span style="color: #990000">(</span>TranslationProcess<span style="color: #990000">.</span>java<span style="color: #990000">:</span><span style="color: #993399">196</span><span style="color: #990000">)</span>
+        at bioai<span style="color: #990000">.</span>ccgprocessor<span style="color: #990000">.</span>translation<span style="color: #990000">.</span>TranslationProcess<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">test</span></span><span style="color: #990000">(</span>TranslationProcess<span style="color: #990000">.</span>java<span style="color: #990000">:</span><span style="color: #993399">112</span><span style="color: #990000">)</span>
+        at bioai<span style="color: #990000">.</span>ccgprocessor<span style="color: #990000">.</span>tests<span style="color: #990000">.</span>scripts<span style="color: #990000">.</span>NL2KR_TTest<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">main</span></span><span style="color: #990000">(</span>NL2KR_TTest<span style="color: #990000">.</span>java<span style="color: #990000">:</span><span style="color: #993399">90</span><span style="color: #990000">)</span>
+java<span style="color: #990000">.</span>lang<span style="color: #990000">.</span>NullPointerException
+        at bioai<span style="color: #990000">.</span>ccgprocessor<span style="color: #990000">.</span>pccg<span style="color: #990000">.</span>parser<span style="color: #990000">.</span>PCCGParser<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">parse</span></span><span style="color: #990000">(</span>PCCGParser<span style="color: #990000">.</span>java<span style="color: #990000">:</span><span style="color: #993399">252</span><span style="color: #990000">)</span>
+        at bioai<span style="color: #990000">.</span>ccgprocessor<span style="color: #990000">.</span>translation<span style="color: #990000">.</span>TranslationProcess<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">testPair</span></span><span style="color: #990000">(</span>TranslationProcess<span style="color: #990000">.</span>java<span style="color: #990000">:</span><span style="color: #993399">196</span><span style="color: #990000">)</span>
+        at bioai<span style="color: #990000">.</span>ccgprocessor<span style="color: #990000">.</span>translation<span style="color: #990000">.</span>TranslationProcess<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">test</span></span><span style="color: #990000">(</span>TranslationProcess<span style="color: #990000">.</span>java<span style="color: #990000">:</span><span style="color: #993399">112</span><span style="color: #990000">)</span>
+        at bioai<span style="color: #990000">.</span>ccgprocessor<span style="color: #990000">.</span>tests<span style="color: #990000">.</span>scripts<span style="color: #990000">.</span>NL2KR_TTest<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">main</span></span><span style="color: #990000">(</span>NL2KR_TTest<span style="color: #990000">.</span>java<span style="color: #990000">:</span><span style="color: #993399">90</span><span style="color: #990000">)</span></tt></pre></div></div>
+<div class="paragraph"><p>Thus we need to provide more context to the training engine.</p></div>
+<div class="paragraph"><p>Create a new learning file</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.6
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt>Ldata<span style="color: #990000">=../</span>PartA<span style="color: #990000">/</span>wright3_learn<span style="color: #990000">.</span>txt
+Ldictionary<span style="color: #990000">=../</span>PartA<span style="color: #990000">/</span>wright3_dict<span style="color: #990000">.</span>txt
+Lsyntax<span style="color: #990000">=../</span>PartA<span style="color: #990000">/</span>wright3_syntax<span style="color: #990000">.</span>txt
+Loutput<span style="color: #990000">=../</span>PartA<span style="color: #990000">/</span>wright3_policy<span style="color: #990000">.</span>out</tt></pre></div></div>
+<div class="paragraph"><p>We want to teach the system what transfer means so we provide the
+dictionary for some nouns</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.6
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt>ownership       N       ownership
+rods    N       ownership</tt></pre></div></div>
+<div class="paragraph"><p>Run the learning engine again to learn the new vocabulary.</p></div>
+<div class="paragraph"><p>We repaired the error, but still no parse tree.</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.6
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt>student@student-VirtualBox <span style="color: #990000">~</span>/Desktop/workspaces<span style="color: #990000">/</span>471_project/NL2KR-System $ <span style="color: #990000">.</span>/NL2KR-T<span style="color: #990000">.</span>sh wright_train<span style="color: #990000">.</span>conf
+<span style="color: #990000">******</span>Reading <span style="font-weight: bold"><span style="color: #0000FF">test</span></span> data<span style="color: #990000">:</span> <span style="color: #990000">..</span>/PartA/wright_train<span style="color: #990000">.</span>txt
+Test line<span style="color: #990000">:</span> <span style="color: #993399">0</span>
+Test line<span style="color: #990000">:</span> <span style="color: #993399">1</span>
+Test line<span style="color: #990000">:</span> <span style="color: #993399">2</span>
+<span style="color: #990000">******</span>Reading lexicon file<span style="color: #990000">:</span> <span style="color: #990000">..</span>/PartA/wright_learn<span style="color: #990000">.</span>out
+Line<span style="color: #990000">[</span><span style="color: #993399">0</span><span style="color: #990000">]</span> Syntax<span style="color: #990000">:[[</span>N/N<span style="color: #990000">]]</span> Semantics<span style="color: #990000">:[</span>financial<span style="color: #990000">]</span>
+Line<span style="color: #990000">[</span><span style="color: #993399">1</span><span style="color: #990000">]</span> Syntax<span style="color: #990000">:[[</span>N/N<span style="color: #990000">]]</span> Semantics<span style="color: #990000">:[</span>to<span style="color: #990000">]</span>
+Line<span style="color: #990000">[</span><span style="color: #993399">2</span><span style="color: #990000">]</span> Syntax<span style="color: #990000">:[[</span>N/N<span style="color: #990000">]]</span> Semantics<span style="color: #990000">:[</span>data<span style="color: #990000">]</span>
+Line<span style="color: #990000">[</span><span style="color: #993399">3</span><span style="color: #990000">]</span> Syntax<span style="color: #990000">:[[</span>N<span style="color: #990000">]]</span> Semantics<span style="color: #990000">:[</span>data<span style="color: #990000">]</span>
+Line<span style="color: #990000">[</span><span style="color: #993399">4</span><span style="color: #990000">]</span> Syntax<span style="color: #990000">:[[</span>N<span style="color: #990000">]]</span> Semantics<span style="color: #990000">:[</span><span style="font-style: italic"><span style="color: #9A1900">#x.audit_report(x)]</span></span>
+Line<span style="color: #990000">[</span><span style="color: #993399">5</span><span style="color: #990000">]</span> Syntax<span style="color: #990000">:[[</span>N<span style="color: #990000">]]</span> Semantics<span style="color: #990000">:[</span>audit_report<span style="color: #990000">]</span>
+Line<span style="color: #990000">[</span><span style="color: #993399">6</span><span style="color: #990000">]</span> Syntax<span style="color: #990000">:[[</span>N/N<span style="color: #990000">]]</span> Semantics<span style="color: #990000">:[</span><span style="font-style: italic"><span style="color: #9A1900">#x.print(x)]</span></span>
+Line<span style="color: #990000">[</span><span style="color: #993399">7</span><span style="color: #990000">]</span> Syntax<span style="color: #990000">:[[</span>N/N<span style="color: #990000">]]</span> Semantics<span style="color: #990000">:[</span><span style="font-style: italic"><span style="color: #9A1900">#x.#y.transfer(x,y)]</span></span>
+Line<span style="color: #990000">[</span><span style="color: #993399">8</span><span style="color: #990000">]</span> Syntax<span style="color: #990000">:[[</span>N<span style="color: #990000">]]</span> Semantics<span style="color: #990000">:[</span>risk<span style="color: #990000">]</span>
+Line<span style="color: #990000">[</span><span style="color: #993399">9</span><span style="color: #990000">]</span> Syntax<span style="color: #990000">:[[</span>N/N<span style="color: #990000">]]</span> Semantics<span style="color: #990000">:[</span><span style="font-style: italic"><span style="color: #9A1900">#x.rename(x)]</span></span>
+Line<span style="color: #990000">[</span><span style="color: #993399">10</span><span style="color: #990000">]</span> Syntax<span style="color: #990000">:[[</span>N/N<span style="color: #990000">]]</span> Semantics<span style="color: #990000">:[</span>new<span style="color: #990000">]</span>
+Line<span style="color: #990000">[</span><span style="color: #993399">11</span><span style="color: #990000">]</span> Syntax<span style="color: #990000">:[[(</span>S<span style="color: #990000">\</span>NP<span style="color: #990000">)</span>/NP<span style="color: #990000">]]</span> Semantics<span style="color: #990000">:[</span><span style="font-style: italic"><span style="color: #9A1900">#x.list(x)]</span></span>
+Line<span style="color: #990000">[</span><span style="color: #993399">12</span><span style="color: #990000">]</span> Syntax<span style="color: #990000">:[[</span>N<span style="color: #990000">]]</span> Semantics<span style="color: #990000">:[</span><span style="font-style: italic"><span style="color: #9A1900">#x.report(x)]</span></span>
+Line<span style="color: #990000">[</span><span style="color: #993399">13</span><span style="color: #990000">]</span> Syntax<span style="color: #990000">:[[</span>N<span style="color: #990000">]]</span> Semantics<span style="color: #990000">:[</span>report<span style="color: #990000">]</span>
+Line<span style="color: #990000">[</span><span style="color: #993399">14</span><span style="color: #990000">]</span> Syntax<span style="color: #990000">:[[</span>N/N<span style="color: #990000">]]</span> Semantics<span style="color: #990000">:[</span><span style="font-style: italic"><span style="color: #9A1900">#x.generate(x)]</span></span>
+Line<span style="color: #990000">[</span><span style="color: #993399">15</span><span style="color: #990000">]</span> Syntax<span style="color: #990000">:[[</span>N<span style="color: #990000">]]</span> Semantics<span style="color: #990000">:[</span>storage<span style="color: #990000">]</span>
+Line<span style="color: #990000">[</span><span style="color: #993399">16</span><span style="color: #990000">]</span> Syntax<span style="color: #990000">:[[</span>N<span style="color: #990000">]]</span> Semantics<span style="color: #990000">:[</span>preservation_attributes<span style="color: #990000">]</span>
+TestingProcess<span style="color: #990000">:</span> <span style="color: #993399">3</span> testing data <span style="font-weight: bold"><span style="color: #0000FF">read</span></span><span style="color: #990000">.</span>
+<span style="color: #990000">******</span>Parsing Sentences <span style="color: #990000">...</span>
+Parsing <span style="font-weight: bold"><span style="color: #0000FF">test</span></span> sentence<span style="color: #990000">:</span> Rename collection
+Expected Representation<span style="color: #990000">:</span> <span style="font-weight: bold"><span style="color: #0000FF">command</span></span> <span style="color: #990000">&gt;</span> rename<span style="color: #990000">(</span>collection<span style="color: #990000">)</span>
+Predicted Result<span style="color: #990000">:</span> <span style="font-weight: bold"><span style="color: #0000FF">command</span></span> <span style="color: #990000">&gt;</span> rename<span style="color: #990000">(</span>collection<span style="color: #990000">)</span>
+Correct Prediction
+
+Parsing <span style="font-weight: bold"><span style="color: #0000FF">test</span></span> sentence<span style="color: #990000">:</span> Print staff_experience report
+Expected Representation<span style="color: #990000">:</span> <span style="font-weight: bold"><span style="color: #0000FF">command</span></span> <span style="color: #990000">&gt;</span> print<span style="color: #990000">(</span>report<span style="color: #990000">(</span>staff_experience<span style="color: #990000">))</span>
+Predicted Result<span style="color: #990000">:</span> <span style="font-weight: bold"><span style="color: #0000FF">command</span></span> <span style="color: #990000">&gt;</span> print<span style="color: #990000">(</span>report<span style="color: #990000">(</span>staff_experience<span style="color: #990000">))</span>
+Correct Prediction
+
+Parsing <span style="font-weight: bold"><span style="color: #0000FF">test</span></span> sentence<span style="color: #990000">:</span> Transfer ownership to rods
+Expected Representation<span style="color: #990000">:</span> <span style="font-weight: bold"><span style="color: #0000FF">command</span></span> <span style="color: #990000">&gt;</span> transfer<span style="color: #990000">(</span>ownership<span style="color: #990000">,</span> rods<span style="color: #990000">)</span>
+Generalizing ownership <span style="color: #990000">=</span> null
+Generalizing ownership <span style="color: #990000">=</span> null
+Correct output does not exist <span style="font-weight: bold"><span style="color: #0000FF">in</span></span> the parse result
+Predicted Result<span style="color: #990000">:</span>null
+Wrong Prediction
+
+Correct Predictions <span style="color: #990000">:</span> <span style="color: #993399">2</span><span style="color: #990000">/</span><span style="color: #993399">3</span>
+Incorrect Predictions <span style="color: #990000">:</span> <span style="color: #993399">0</span><span style="color: #990000">/</span><span style="color: #993399">3</span>
+Predictions <span style="font-weight: bold"><span style="color: #0000FF">for</span></span> sentences having unknown Expected Representations <span style="color: #990000">:</span> <span style="color: #993399">0</span><span style="color: #990000">/</span><span style="color: #993399">0</span>
+No Predictions <span style="color: #990000">:</span> <span style="color: #993399">1</span><span style="color: #990000">/</span><span style="color: #993399">3</span>
+Total evaluation costs<span style="color: #990000">:</span> 00h<span style="color: #990000">:</span>00m<span style="color: #990000">:</span>47s<span style="color: #990000">:</span>012ms</tt></pre></div></div>
+</div>
+</div>
 </div>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2013-11-17 13:35:19 MST
+Last updated 2013-11-17 15:12:02 MST
 </div>
 </div>
 </body>

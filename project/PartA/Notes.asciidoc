@@ -186,7 +186,7 @@ digraph { graph[ordering="out"]
 }
 --------------------
 
-So we append to our grammar file
+So we append to our syntax file
 [source,python]
 ---------------------
 Generate (N/N)
@@ -276,7 +276,7 @@ digraph {graph[ordering="out"]
 }
 --------------------
 
-So we append to our grammar file
+So we append to our syntax file
 [source,python]
 -------------------
 Transfer (N/N)
@@ -286,6 +286,69 @@ new (N/N)
 storage (N)
 -------------------
 
+And add to our training document
+[source,python]
+------------------
+Transfer data to new storage	command > transfer(data, storage(new))
+------------------
+
+Sentence 5
+-----------
+
+[source,python]
+---------------
+sentence=Generate report on risk
+syntaxFile=./examples/sample/syntax.txt
+----------------
+
+Which generates the following output
+[source,python]
+----------------
+l2kr_child_right("t_5","t_1")
+nl2kr_child_left("t_5","t_4")
+nl2kr_token("t_6","on risk","(N\\N)",-1)
+nl2kr_token("t_3","risk","N",-1)
+nl2kr_token("t_7","Generate report on risk","N",-1)
+nl2kr_token("t_4","Generate","(N/N)",-1)
+nl2kr_token("t_2","on","((N\\N)/NP)",-1)
+nl2kr_token("t_1","report","N",-1)
+nl2kr_child_left("t_7","t_5")
+nl2kr_valid_rootNode("t_7")
+nl2kr_child_right("t_7","t_6")
+nl2kr_child_left("t_6","t_2")
+nl2kr_child_right("t_6","t_3")
+nl2kr_token("t_5","Generate report","N",-1)
+------------------
+
+The tree makes sense
+[graphviz]
+-----------------
+digraph {graph[ordering="out"]
+"7 Generate report on risk N" -> "5 Generate report N"
+"7 Generate report on risk N" -> "6 on risk (N\\N)"
+
+"5 Generate report N" -> "4 Generate (N/N)"
+"5 Generate report N" -> "1 report N"
+"6 on risk (N\\N)" -> "2 on ((N\\N)/NP)"
+"6 on risk (N\\N)" -> "3 risk N"
+}
+-------------------
+
+
+So we append to our grammar gile
+[source,python]
+-------------------
+Generate (N/N)
+report N
+on ((N\\N)/NP)
+risk N
+-----------------
+
+And add to our training file
+[source,python]
+----------------
+Generate report on risk	command > generate(report(risk))
+----------------
 
 
 Building Lambda Definitions
@@ -319,4 +382,297 @@ print (N/N) #x.print(x)
 financial (N/N) financial
 audit_report (N) #x.audit_report(x)
 -------------------
+
+
+
+Learning
+--------
+
+Learning Configuration
+[source,bash]
+--------------
+Ldata=../PartA/wright_train.txt
+Ldictionary=../PartA/wright_dict.txt
+Lsyntax=../PartA/wright_syntax.txt
+Loutput=../PartA/wright_train.out
+--------------
+
+After corecting a few syntax errors in the dictionary file, generates
+the following lexicon file
+[source,python]
+----------------
+financial	[N/N]	financial	0.01
+to	[N/N]	to	0.01
+data	[N/N]	data	0.01
+data	[N]	data	0.01
+audit_report	[N]	#x.audit_report(x)	0.01
+audit_report	[N]	audit_report	0.01
+Print	[N/N]	#x.print(x)	0.01
+Transfer	[N/N]	#x.#y.transfer(x,y)	0.01
+risk	[N]	risk	0.01
+Rename	[N/N]	#x.rename(x)	0.01
+new	[N/N]	new	0.01
+listing	[(S\NP)/NP]	#x.list(x)	0.01
+report	[N]	#x.report(x)	0.01
+report	[N]	report	0.01
+Generate	[N/N]	#x.generate(x)	0.01
+storage	[N]	storage	0.01
+preservation_attributes	[N]	preservation_attributes	0.01
+-----------------
+
+To which we can test new files.  This resulted in the following error:
+[source,python]
+----------------
+TestingProcess: 3 testing data read.
+******Parsing Sentences ...
+Parsing test sentence: Rename collection
+Expected Representation: command > rename(collection)
+Predicted Result: command > rename(collection)
+Correct Prediction
+
+Parsing test sentence: Print staff_experience report
+Expected Representation: command > print(report(staff_experience))
+Predicted Result: command > print(report(staff_experience))
+Correct Prediction
+
+Parsing test sentence: Transfer ownership to rods
+Expected Representation: command > transfer(ownership, rods)
+java.io.FileNotFoundException: resources/aspccgtk-parser/output/output_Transfer_ownership_to_rods.asp (No such file or directory)
+	at java.io.FileInputStream.open(Native Method)
+	at java.io.FileInputStream.<init>(FileInputStream.java:138)
+	at java.io.FileInputStream.<init>(FileInputStream.java:97)
+	at java.io.FileReader.<init>(FileReader.java:58)
+	at bioai.ccgprocessor.ccgparsing.aspccgtkParser.ASPCCGTKWrapper.callASPCCGParser(ASPCCGTKWrapper.java:185)
+	at bioai.ccgprocessor.ccgparsing.aspccgtkParser.ASPCCGParser.parse(ASPCCGParser.java:32)
+	at bioai.ccgprocessor.pccg.parser.PCCGParser.parseTable(PCCGParser.java:172)
+	at bioai.ccgprocessor.pccg.parser.PCCGParser.parse(PCCGParser.java:251)
+	at bioai.ccgprocessor.translation.TranslationProcess.testPair(TranslationProcess.java:196)
+	at bioai.ccgprocessor.translation.TranslationProcess.test(TranslationProcess.java:112)
+	at bioai.ccgprocessor.tests.scripts.NL2KR_TTest.main(NL2KR_TTest.java:90)
+java.lang.NullPointerException
+	at bioai.ccgprocessor.ccgparsing.aspccgtkParser.ASPCCGParser.parse(ASPCCGParser.java:37)
+	at bioai.ccgprocessor.pccg.parser.PCCGParser.parseTable(PCCGParser.java:172)
+	at bioai.ccgprocessor.pccg.parser.PCCGParser.parse(PCCGParser.java:251)
+	at bioai.ccgprocessor.translation.TranslationProcess.testPair(TranslationProcess.java:196)
+	at bioai.ccgprocessor.translation.TranslationProcess.test(TranslationProcess.java:112)
+	at bioai.ccgprocessor.tests.scripts.NL2KR_TTest.main(NL2KR_TTest.java:90)
+java.lang.NullPointerException
+	at bioai.ccgprocessor.pccg.parser.PCCGParser.parse(PCCGParser.java:252)
+	at bioai.ccgprocessor.translation.TranslationProcess.testPair(TranslationProcess.java:196)
+	at bioai.ccgprocessor.translation.TranslationProcess.test(TranslationProcess.java:112)
+	at bioai.ccgprocessor.tests.scripts.NL2KR_TTest.main(NL2KR_TTest.java:90)
+--------------
+
+Thus we need to provide more context to the training engine.
+
+Create a new learning file
+[source,python]
+----------------
+Ldata=../PartA/wright3_learn.txt
+Ldictionary=../PartA/wright3_dict.txt
+Lsyntax=../PartA/wright3_syntax.txt
+Loutput=../PartA/wright3_policy.out
+----------------
+
+We want to teach the system what transfer means so we provide the
+dictionary for some nouns
+[source,python]
+---------------
+ownership	N	ownership
+rods	N	ownership
+---------------
+
+Run the learning engine again to learn the new vocabulary.
+
+We repaired the error, but still no parse tree.
+[source,bash]
+--------------
+student@student-VirtualBox ~/Desktop/workspaces/471_project/NL2KR-System $ ./NL2KR-T.sh wright_train.conf 
+******Reading test data: ../PartA/wright_train.txt
+Test line: 0
+Test line: 1
+Test line: 2
+******Reading lexicon file: ../PartA/wright_learn.out
+Line[0] Syntax:[[N/N]] Semantics:[financial]
+Line[1] Syntax:[[N/N]] Semantics:[to]
+Line[2] Syntax:[[N/N]] Semantics:[data]
+Line[3] Syntax:[[N]] Semantics:[data]
+Line[4] Syntax:[[N]] Semantics:[#x.audit_report(x)]
+Line[5] Syntax:[[N]] Semantics:[audit_report]
+Line[6] Syntax:[[N/N]] Semantics:[#x.print(x)]
+Line[7] Syntax:[[N/N]] Semantics:[#x.#y.transfer(x,y)]
+Line[8] Syntax:[[N]] Semantics:[risk]
+Line[9] Syntax:[[N/N]] Semantics:[#x.rename(x)]
+Line[10] Syntax:[[N/N]] Semantics:[new]
+Line[11] Syntax:[[(S\NP)/NP]] Semantics:[#x.list(x)]
+Line[12] Syntax:[[N]] Semantics:[#x.report(x)]
+Line[13] Syntax:[[N]] Semantics:[report]
+Line[14] Syntax:[[N/N]] Semantics:[#x.generate(x)]
+Line[15] Syntax:[[N]] Semantics:[storage]
+Line[16] Syntax:[[N]] Semantics:[preservation_attributes]
+TestingProcess: 3 testing data read.
+******Parsing Sentences ...
+Parsing test sentence: Rename collection
+Expected Representation: command > rename(collection)
+Predicted Result: command > rename(collection)
+Correct Prediction
+
+Parsing test sentence: Print staff_experience report
+Expected Representation: command > print(report(staff_experience))
+Predicted Result: command > print(report(staff_experience))
+Correct Prediction
+
+Parsing test sentence: Transfer ownership to rods
+Expected Representation: command > transfer(ownership, rods)
+Generalizing ownership = null
+Generalizing ownership = null
+Correct output does not exist in the parse result
+Predicted Result:null
+Wrong Prediction
+
+Correct Predictions : 2/3
+Incorrect Predictions : 0/3
+Predictions for sentences having unknown Expected Representations : 0/0
+No Predictions : 1/3
+Total evaluation costs: 00h:00m:47s:012ms
+----------------
+
+We have the policy learnt from the previous step, we can append this
+to the overall lexicon. The resulting policy file is:
+
+[source,python]
+----------------
+Refinancial	[N/N]	financial	0.01
+to	[N/N]	to	0.01
+data	[N/N]	data	0.01
+data	[N]	data	0.01
+audit_report	[N]	#x.audit_report(x)	0.01
+audit_report	[N]	audit_report	0.01
+Print	[N/N]	#x.print(x)	0.01
+Transfer	[N/N]	#x.#y.transfer(x,y)	0.01
+risk	[N]	risk	0.01
+Rename	[N/N]	#x.rename(x)	0.01
+new	[N/N]	new	0.01
+listing	[(S\NP)/NP]	#x.list(x)	0.01
+report	[N]	#x.report(x)	0.01
+report	[N]	report	0.01
+Generate	[N/N]	#x.generate(x)	0.01
+storage	[N]	storage	0.01
+preservation_attributes	[N]	preservation_attributes	0.01
+ownership	[N]	ownership	0.01
+rods	[N]	rods	0.01
+rods	[N]	ownership	0.01
+-------------
+
+
+Still unable to parse the result
+[source,bash]
+------------------
+******Reading test data: ../PartA/wright_train.txt
+Test line: 0
+Test line: 1
+Test line: 2
+******Reading lexicon file: ../PartA/wright_learn.out
+Line[0] Syntax:[[N/N]] Semantics:[financial]
+Line[1] Syntax:[[N/N]] Semantics:[to]
+Line[2] Syntax:[[N/N]] Semantics:[data]
+Line[3] Syntax:[[N]] Semantics:[data]
+Line[4] Syntax:[[N]] Semantics:[#x.audit_report(x)]
+Line[5] Syntax:[[N]] Semantics:[audit_report]
+Line[6] Syntax:[[N/N]] Semantics:[#x.print(x)]
+Line[7] Syntax:[[N/N]] Semantics:[#x.#y.transfer(x,y)]
+Line[8] Syntax:[[N]] Semantics:[risk]
+Line[9] Syntax:[[N/N]] Semantics:[#x.rename(x)]
+Line[10] Syntax:[[N/N]] Semantics:[new]
+Line[11] Syntax:[[(S\NP)/NP]] Semantics:[#x.list(x)]
+Line[12] Syntax:[[N]] Semantics:[#x.report(x)]
+Line[13] Syntax:[[N]] Semantics:[report]
+Line[14] Syntax:[[N/N]] Semantics:[#x.generate(x)]
+Line[15] Syntax:[[N]] Semantics:[storage]
+Line[16] Syntax:[[N]] Semantics:[preservation_attributes]
+Line[17] Syntax:[[N]] Semantics:[ownership]
+Line[18] Syntax:[[N]] Semantics:[rods]
+Line[19] Syntax:[[N]] Semantics:[ownership]
+TestingProcess: 3 testing data read.
+******Parsing Sentences ...
+Parsing test sentence: Rename collection
+Expected Representation: command > rename(collection)
+Predicted Result: command > rename(collection)
+Correct Prediction
+
+Parsing test sentence: Print staff_experience report
+Expected Representation: command > print(report(staff_experience))
+Predicted Result: command > print(report(staff_experience))
+Correct Prediction
+
+Parsing test sentence: Transfer ownership to rods
+Expected Representation: command > transfer(ownership, rods)
+Correct output does not exist in the parse result
+Predicted Result:null
+Wrong Prediction
+
+Correct Predictions : 2/3
+Incorrect Predictions : 0/3
+Predictions for sentences having unknown Expected Representations : 0/0
+No Predictions : 1/3
+Total evaluation costs: 00h:00m:47s:729ms
+----------------
+
+Trying a new third sentence. Trained the result with file set 4.
+
+Still cannot learn the third sentence
+[source,python]
+----------------
+******Reading test data: ../PartA/wright_train.txt
+Test line: 0
+Test line: 1
+Test line: 2
+******Reading lexicon file: ../PartA/wright_learn.out
+Line[0] Syntax:[[N/N]] Semantics:[financial]
+Line[1] Syntax:[[N/N]] Semantics:[to]
+Line[2] Syntax:[[N/N]] Semantics:[data]
+Line[3] Syntax:[[N]] Semantics:[data]
+Line[4] Syntax:[[N]] Semantics:[#x.audit_report(x)]
+Line[5] Syntax:[[N]] Semantics:[audit_report]
+Line[6] Syntax:[[N/N]] Semantics:[#x.print(x)]
+Line[7] Syntax:[[N/N]] Semantics:[#x.#y.transfer(x,y)]
+Line[8] Syntax:[[N]] Semantics:[risk]
+Line[9] Syntax:[[N/N]] Semantics:[#x.rename(x)]
+Line[10] Syntax:[[N/N]] Semantics:[new]
+Line[11] Syntax:[[(S\NP)/NP]] Semantics:[#x.list(x)]
+Line[12] Syntax:[[N]] Semantics:[#x.report(x)]
+Line[13] Syntax:[[N]] Semantics:[report]
+Line[14] Syntax:[[N/N]] Semantics:[#x.generate(x)]
+Line[15] Syntax:[[N]] Semantics:[storage]
+Line[16] Syntax:[[N]] Semantics:[preservation_attributes]
+Line[17] Syntax:[[N]] Semantics:[ownership]
+Line[18] Syntax:[[N]] Semantics:[rods]
+Line[19] Syntax:[[N]] Semantics:[ownership]
+Line[20] Syntax:[[N]] Semantics:[master_copy]
+Line[21] Syntax:[[N]] Semantics:[file]
+TestingProcess: 3 testing data read.
+******Parsing Sentences ...
+Parsing test sentence: Rename collection
+Expected Representation: command > rename(collection)
+Predicted Result: command > rename(collection)
+Correct Prediction
+
+Parsing test sentence: Print staff_experience report
+Expected Representation: command > print(report(staff_experience))
+Predicted Result: command > print(report(staff_experience))
+Correct Prediction
+
+Parsing test sentence: file is master_copy
+Expected Representation: master_copy(file)
+Generalizing is = null
+Correct output does not exist in the parse result
+Predicted Result:null
+Wrong Prediction
+
+Correct Predictions : 2/3
+Incorrect Predictions : 0/3
+Predictions for sentences having unknown Expected Representations : 0/0
+No Predictions : 1/3
+Total evaluation costs: 00h:00m:47s:085ms
+-----------------
 
