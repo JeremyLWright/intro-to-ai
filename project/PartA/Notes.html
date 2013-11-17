@@ -4,7 +4,7 @@
 <head>
 <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
 <meta name="generator" content="AsciiDoc 8.6.8" />
-<title></title>
+<title>CSE471/598 NL2KR Project</title>
 <style type="text/css">
 /* Shared CSS for AsciiDoc xhtml11 and html5 backends */
 
@@ -725,12 +725,18 @@ install: function(toclevels) {
 }
 
 }
-asciidoc.install();
+asciidoc.install(2);
 /*]]>*/
 </script>
 </head>
 <body class="article">
 <div id="header">
+<h1>CSE471/598 NL2KR Project</h1>
+<span id="author">Jeremy Wright</span><br />
+<div id="toc">
+  <div id="toctitle">Table of Contents</div>
+  <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
+</div>
 </div>
 <div id="content">
 <div class="sect1">
@@ -1273,13 +1279,152 @@ Incorrect Predictions <span style="color: #990000">:</span> <span style="color: 
 Predictions <span style="font-weight: bold"><span style="color: #0000FF">for</span></span> sentences having unknown Expected Representations <span style="color: #990000">:</span> <span style="color: #993399">0</span><span style="color: #990000">/</span><span style="color: #993399">0</span>
 No Predictions <span style="color: #990000">:</span> <span style="color: #993399">1</span><span style="color: #990000">/</span><span style="color: #993399">3</span>
 Total evaluation costs<span style="color: #990000">:</span> 00h<span style="color: #990000">:</span>00m<span style="color: #990000">:</span>47s<span style="color: #990000">:</span>012ms</tt></pre></div></div>
+<div class="paragraph"><p>We have the policy learnt from the previous step, we can append this
+to the overall lexicon. The resulting policy file is:</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.6
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt>Refinancial     <span style="color: #990000">[</span>N<span style="color: #990000">/</span>N<span style="color: #990000">]</span>   financial       <span style="color: #993399">0.01</span>
+to      <span style="color: #990000">[</span>N<span style="color: #990000">/</span>N<span style="color: #990000">]</span>   to      <span style="color: #993399">0.01</span>
+data    <span style="color: #990000">[</span>N<span style="color: #990000">/</span>N<span style="color: #990000">]</span>   data    <span style="color: #993399">0.01</span>
+data    <span style="color: #990000">[</span>N<span style="color: #990000">]</span>     data    <span style="color: #993399">0.01</span>
+audit_report    <span style="color: #990000">[</span>N<span style="color: #990000">]</span>     <span style="font-style: italic"><span style="color: #9A1900">#x.audit_report(x)      0.01</span></span>
+audit_report    <span style="color: #990000">[</span>N<span style="color: #990000">]</span>     audit_report    <span style="color: #993399">0.01</span>
+Print   <span style="color: #990000">[</span>N<span style="color: #990000">/</span>N<span style="color: #990000">]</span>   <span style="font-style: italic"><span style="color: #9A1900">#x.print(x)     0.01</span></span>
+Transfer        <span style="color: #990000">[</span>N<span style="color: #990000">/</span>N<span style="color: #990000">]</span>   <span style="font-style: italic"><span style="color: #9A1900">#x.#y.transfer(x,y)     0.01</span></span>
+risk    <span style="color: #990000">[</span>N<span style="color: #990000">]</span>     risk    <span style="color: #993399">0.01</span>
+Rename  <span style="color: #990000">[</span>N<span style="color: #990000">/</span>N<span style="color: #990000">]</span>   <span style="font-style: italic"><span style="color: #9A1900">#x.rename(x)    0.01</span></span>
+new     <span style="color: #990000">[</span>N<span style="color: #990000">/</span>N<span style="color: #990000">]</span>   new     <span style="color: #993399">0.01</span>
+listing <span style="color: #990000">[(</span>S<span style="color: #990000">\</span>NP<span style="color: #990000">)/</span>NP<span style="color: #990000">]</span>     <span style="font-style: italic"><span style="color: #9A1900">#x.list(x)      0.01</span></span>
+report  <span style="color: #990000">[</span>N<span style="color: #990000">]</span>     <span style="font-style: italic"><span style="color: #9A1900">#x.report(x)    0.01</span></span>
+report  <span style="color: #990000">[</span>N<span style="color: #990000">]</span>     report  <span style="color: #993399">0.01</span>
+Generate        <span style="color: #990000">[</span>N<span style="color: #990000">/</span>N<span style="color: #990000">]</span>   <span style="font-style: italic"><span style="color: #9A1900">#x.generate(x)  0.01</span></span>
+storage <span style="color: #990000">[</span>N<span style="color: #990000">]</span>     storage <span style="color: #993399">0.01</span>
+preservation_attributes <span style="color: #990000">[</span>N<span style="color: #990000">]</span>     preservation_attributes <span style="color: #993399">0.01</span>
+ownership       <span style="color: #990000">[</span>N<span style="color: #990000">]</span>     ownership       <span style="color: #993399">0.01</span>
+rods    <span style="color: #990000">[</span>N<span style="color: #990000">]</span>     rods    <span style="color: #993399">0.01</span>
+rods    <span style="color: #990000">[</span>N<span style="color: #990000">]</span>     ownership       <span style="color: #993399">0.01</span></tt></pre></div></div>
+<div class="paragraph"><p>Still unable to parse the result</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.6
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="color: #990000">******</span>Reading <span style="font-weight: bold"><span style="color: #0000FF">test</span></span> data<span style="color: #990000">:</span> <span style="color: #990000">..</span>/PartA/wright_train<span style="color: #990000">.</span>txt
+Test line<span style="color: #990000">:</span> <span style="color: #993399">0</span>
+Test line<span style="color: #990000">:</span> <span style="color: #993399">1</span>
+Test line<span style="color: #990000">:</span> <span style="color: #993399">2</span>
+<span style="color: #990000">******</span>Reading lexicon file<span style="color: #990000">:</span> <span style="color: #990000">..</span>/PartA/wright_learn<span style="color: #990000">.</span>out
+Line<span style="color: #990000">[</span><span style="color: #993399">0</span><span style="color: #990000">]</span> Syntax<span style="color: #990000">:[[</span>N/N<span style="color: #990000">]]</span> Semantics<span style="color: #990000">:[</span>financial<span style="color: #990000">]</span>
+Line<span style="color: #990000">[</span><span style="color: #993399">1</span><span style="color: #990000">]</span> Syntax<span style="color: #990000">:[[</span>N/N<span style="color: #990000">]]</span> Semantics<span style="color: #990000">:[</span>to<span style="color: #990000">]</span>
+Line<span style="color: #990000">[</span><span style="color: #993399">2</span><span style="color: #990000">]</span> Syntax<span style="color: #990000">:[[</span>N/N<span style="color: #990000">]]</span> Semantics<span style="color: #990000">:[</span>data<span style="color: #990000">]</span>
+Line<span style="color: #990000">[</span><span style="color: #993399">3</span><span style="color: #990000">]</span> Syntax<span style="color: #990000">:[[</span>N<span style="color: #990000">]]</span> Semantics<span style="color: #990000">:[</span>data<span style="color: #990000">]</span>
+Line<span style="color: #990000">[</span><span style="color: #993399">4</span><span style="color: #990000">]</span> Syntax<span style="color: #990000">:[[</span>N<span style="color: #990000">]]</span> Semantics<span style="color: #990000">:[</span><span style="font-style: italic"><span style="color: #9A1900">#x.audit_report(x)]</span></span>
+Line<span style="color: #990000">[</span><span style="color: #993399">5</span><span style="color: #990000">]</span> Syntax<span style="color: #990000">:[[</span>N<span style="color: #990000">]]</span> Semantics<span style="color: #990000">:[</span>audit_report<span style="color: #990000">]</span>
+Line<span style="color: #990000">[</span><span style="color: #993399">6</span><span style="color: #990000">]</span> Syntax<span style="color: #990000">:[[</span>N/N<span style="color: #990000">]]</span> Semantics<span style="color: #990000">:[</span><span style="font-style: italic"><span style="color: #9A1900">#x.print(x)]</span></span>
+Line<span style="color: #990000">[</span><span style="color: #993399">7</span><span style="color: #990000">]</span> Syntax<span style="color: #990000">:[[</span>N/N<span style="color: #990000">]]</span> Semantics<span style="color: #990000">:[</span><span style="font-style: italic"><span style="color: #9A1900">#x.#y.transfer(x,y)]</span></span>
+Line<span style="color: #990000">[</span><span style="color: #993399">8</span><span style="color: #990000">]</span> Syntax<span style="color: #990000">:[[</span>N<span style="color: #990000">]]</span> Semantics<span style="color: #990000">:[</span>risk<span style="color: #990000">]</span>
+Line<span style="color: #990000">[</span><span style="color: #993399">9</span><span style="color: #990000">]</span> Syntax<span style="color: #990000">:[[</span>N/N<span style="color: #990000">]]</span> Semantics<span style="color: #990000">:[</span><span style="font-style: italic"><span style="color: #9A1900">#x.rename(x)]</span></span>
+Line<span style="color: #990000">[</span><span style="color: #993399">10</span><span style="color: #990000">]</span> Syntax<span style="color: #990000">:[[</span>N/N<span style="color: #990000">]]</span> Semantics<span style="color: #990000">:[</span>new<span style="color: #990000">]</span>
+Line<span style="color: #990000">[</span><span style="color: #993399">11</span><span style="color: #990000">]</span> Syntax<span style="color: #990000">:[[(</span>S<span style="color: #990000">\</span>NP<span style="color: #990000">)</span>/NP<span style="color: #990000">]]</span> Semantics<span style="color: #990000">:[</span><span style="font-style: italic"><span style="color: #9A1900">#x.list(x)]</span></span>
+Line<span style="color: #990000">[</span><span style="color: #993399">12</span><span style="color: #990000">]</span> Syntax<span style="color: #990000">:[[</span>N<span style="color: #990000">]]</span> Semantics<span style="color: #990000">:[</span><span style="font-style: italic"><span style="color: #9A1900">#x.report(x)]</span></span>
+Line<span style="color: #990000">[</span><span style="color: #993399">13</span><span style="color: #990000">]</span> Syntax<span style="color: #990000">:[[</span>N<span style="color: #990000">]]</span> Semantics<span style="color: #990000">:[</span>report<span style="color: #990000">]</span>
+Line<span style="color: #990000">[</span><span style="color: #993399">14</span><span style="color: #990000">]</span> Syntax<span style="color: #990000">:[[</span>N/N<span style="color: #990000">]]</span> Semantics<span style="color: #990000">:[</span><span style="font-style: italic"><span style="color: #9A1900">#x.generate(x)]</span></span>
+Line<span style="color: #990000">[</span><span style="color: #993399">15</span><span style="color: #990000">]</span> Syntax<span style="color: #990000">:[[</span>N<span style="color: #990000">]]</span> Semantics<span style="color: #990000">:[</span>storage<span style="color: #990000">]</span>
+Line<span style="color: #990000">[</span><span style="color: #993399">16</span><span style="color: #990000">]</span> Syntax<span style="color: #990000">:[[</span>N<span style="color: #990000">]]</span> Semantics<span style="color: #990000">:[</span>preservation_attributes<span style="color: #990000">]</span>
+Line<span style="color: #990000">[</span><span style="color: #993399">17</span><span style="color: #990000">]</span> Syntax<span style="color: #990000">:[[</span>N<span style="color: #990000">]]</span> Semantics<span style="color: #990000">:[</span>ownership<span style="color: #990000">]</span>
+Line<span style="color: #990000">[</span><span style="color: #993399">18</span><span style="color: #990000">]</span> Syntax<span style="color: #990000">:[[</span>N<span style="color: #990000">]]</span> Semantics<span style="color: #990000">:[</span>rods<span style="color: #990000">]</span>
+Line<span style="color: #990000">[</span><span style="color: #993399">19</span><span style="color: #990000">]</span> Syntax<span style="color: #990000">:[[</span>N<span style="color: #990000">]]</span> Semantics<span style="color: #990000">:[</span>ownership<span style="color: #990000">]</span>
+TestingProcess<span style="color: #990000">:</span> <span style="color: #993399">3</span> testing data <span style="font-weight: bold"><span style="color: #0000FF">read</span></span><span style="color: #990000">.</span>
+<span style="color: #990000">******</span>Parsing Sentences <span style="color: #990000">...</span>
+Parsing <span style="font-weight: bold"><span style="color: #0000FF">test</span></span> sentence<span style="color: #990000">:</span> Rename collection
+Expected Representation<span style="color: #990000">:</span> <span style="font-weight: bold"><span style="color: #0000FF">command</span></span> <span style="color: #990000">&gt;</span> rename<span style="color: #990000">(</span>collection<span style="color: #990000">)</span>
+Predicted Result<span style="color: #990000">:</span> <span style="font-weight: bold"><span style="color: #0000FF">command</span></span> <span style="color: #990000">&gt;</span> rename<span style="color: #990000">(</span>collection<span style="color: #990000">)</span>
+Correct Prediction
+
+Parsing <span style="font-weight: bold"><span style="color: #0000FF">test</span></span> sentence<span style="color: #990000">:</span> Print staff_experience report
+Expected Representation<span style="color: #990000">:</span> <span style="font-weight: bold"><span style="color: #0000FF">command</span></span> <span style="color: #990000">&gt;</span> print<span style="color: #990000">(</span>report<span style="color: #990000">(</span>staff_experience<span style="color: #990000">))</span>
+Predicted Result<span style="color: #990000">:</span> <span style="font-weight: bold"><span style="color: #0000FF">command</span></span> <span style="color: #990000">&gt;</span> print<span style="color: #990000">(</span>report<span style="color: #990000">(</span>staff_experience<span style="color: #990000">))</span>
+Correct Prediction
+
+Parsing <span style="font-weight: bold"><span style="color: #0000FF">test</span></span> sentence<span style="color: #990000">:</span> Transfer ownership to rods
+Expected Representation<span style="color: #990000">:</span> <span style="font-weight: bold"><span style="color: #0000FF">command</span></span> <span style="color: #990000">&gt;</span> transfer<span style="color: #990000">(</span>ownership<span style="color: #990000">,</span> rods<span style="color: #990000">)</span>
+Correct output does not exist <span style="font-weight: bold"><span style="color: #0000FF">in</span></span> the parse result
+Predicted Result<span style="color: #990000">:</span>null
+Wrong Prediction
+
+Correct Predictions <span style="color: #990000">:</span> <span style="color: #993399">2</span><span style="color: #990000">/</span><span style="color: #993399">3</span>
+Incorrect Predictions <span style="color: #990000">:</span> <span style="color: #993399">0</span><span style="color: #990000">/</span><span style="color: #993399">3</span>
+Predictions <span style="font-weight: bold"><span style="color: #0000FF">for</span></span> sentences having unknown Expected Representations <span style="color: #990000">:</span> <span style="color: #993399">0</span><span style="color: #990000">/</span><span style="color: #993399">0</span>
+No Predictions <span style="color: #990000">:</span> <span style="color: #993399">1</span><span style="color: #990000">/</span><span style="color: #993399">3</span>
+Total evaluation costs<span style="color: #990000">:</span> 00h<span style="color: #990000">:</span>00m<span style="color: #990000">:</span>47s<span style="color: #990000">:</span>729ms</tt></pre></div></div>
+<div class="paragraph"><p>Trying a new third sentence. Trained the result with file set 4.</p></div>
+<div class="paragraph"><p>Still cannot learn the third sentence</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.6
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="color: #990000">******</span>Reading test data<span style="color: #990000">:</span> <span style="color: #990000">../</span>PartA<span style="color: #990000">/</span>wright_train<span style="color: #990000">.</span>txt
+Test line<span style="color: #990000">:</span> <span style="color: #993399">0</span>
+Test line<span style="color: #990000">:</span> <span style="color: #993399">1</span>
+Test line<span style="color: #990000">:</span> <span style="color: #993399">2</span>
+<span style="color: #990000">******</span>Reading lexicon file<span style="color: #990000">:</span> <span style="color: #990000">../</span>PartA<span style="color: #990000">/</span>wright_learn<span style="color: #990000">.</span>out
+Line<span style="color: #990000">[</span><span style="color: #993399">0</span><span style="color: #990000">]</span> Syntax<span style="color: #990000">:[[</span>N<span style="color: #990000">/</span>N<span style="color: #990000">]]</span> Semantics<span style="color: #990000">:[</span>financial<span style="color: #990000">]</span>
+Line<span style="color: #990000">[</span><span style="color: #993399">1</span><span style="color: #990000">]</span> Syntax<span style="color: #990000">:[[</span>N<span style="color: #990000">/</span>N<span style="color: #990000">]]</span> Semantics<span style="color: #990000">:[</span>to<span style="color: #990000">]</span>
+Line<span style="color: #990000">[</span><span style="color: #993399">2</span><span style="color: #990000">]</span> Syntax<span style="color: #990000">:[[</span>N<span style="color: #990000">/</span>N<span style="color: #990000">]]</span> Semantics<span style="color: #990000">:[</span>data<span style="color: #990000">]</span>
+Line<span style="color: #990000">[</span><span style="color: #993399">3</span><span style="color: #990000">]</span> Syntax<span style="color: #990000">:[[</span>N<span style="color: #990000">]]</span> Semantics<span style="color: #990000">:[</span>data<span style="color: #990000">]</span>
+Line<span style="color: #990000">[</span><span style="color: #993399">4</span><span style="color: #990000">]</span> Syntax<span style="color: #990000">:[[</span>N<span style="color: #990000">]]</span> Semantics<span style="color: #990000">:[</span><span style="font-style: italic"><span style="color: #9A1900">#x.audit_report(x)]</span></span>
+Line<span style="color: #990000">[</span><span style="color: #993399">5</span><span style="color: #990000">]</span> Syntax<span style="color: #990000">:[[</span>N<span style="color: #990000">]]</span> Semantics<span style="color: #990000">:[</span>audit_report<span style="color: #990000">]</span>
+Line<span style="color: #990000">[</span><span style="color: #993399">6</span><span style="color: #990000">]</span> Syntax<span style="color: #990000">:[[</span>N<span style="color: #990000">/</span>N<span style="color: #990000">]]</span> Semantics<span style="color: #990000">:[</span><span style="font-style: italic"><span style="color: #9A1900">#x.print(x)]</span></span>
+Line<span style="color: #990000">[</span><span style="color: #993399">7</span><span style="color: #990000">]</span> Syntax<span style="color: #990000">:[[</span>N<span style="color: #990000">/</span>N<span style="color: #990000">]]</span> Semantics<span style="color: #990000">:[</span><span style="font-style: italic"><span style="color: #9A1900">#x.#y.transfer(x,y)]</span></span>
+Line<span style="color: #990000">[</span><span style="color: #993399">8</span><span style="color: #990000">]</span> Syntax<span style="color: #990000">:[[</span>N<span style="color: #990000">]]</span> Semantics<span style="color: #990000">:[</span>risk<span style="color: #990000">]</span>
+Line<span style="color: #990000">[</span><span style="color: #993399">9</span><span style="color: #990000">]</span> Syntax<span style="color: #990000">:[[</span>N<span style="color: #990000">/</span>N<span style="color: #990000">]]</span> Semantics<span style="color: #990000">:[</span><span style="font-style: italic"><span style="color: #9A1900">#x.rename(x)]</span></span>
+Line<span style="color: #990000">[</span><span style="color: #993399">10</span><span style="color: #990000">]</span> Syntax<span style="color: #990000">:[[</span>N<span style="color: #990000">/</span>N<span style="color: #990000">]]</span> Semantics<span style="color: #990000">:[</span>new<span style="color: #990000">]</span>
+Line<span style="color: #990000">[</span><span style="color: #993399">11</span><span style="color: #990000">]</span> Syntax<span style="color: #990000">:[[(</span>S<span style="color: #990000">\</span>NP<span style="color: #990000">)/</span>NP<span style="color: #990000">]]</span> Semantics<span style="color: #990000">:[</span><span style="font-style: italic"><span style="color: #9A1900">#x.list(x)]</span></span>
+Line<span style="color: #990000">[</span><span style="color: #993399">12</span><span style="color: #990000">]</span> Syntax<span style="color: #990000">:[[</span>N<span style="color: #990000">]]</span> Semantics<span style="color: #990000">:[</span><span style="font-style: italic"><span style="color: #9A1900">#x.report(x)]</span></span>
+Line<span style="color: #990000">[</span><span style="color: #993399">13</span><span style="color: #990000">]</span> Syntax<span style="color: #990000">:[[</span>N<span style="color: #990000">]]</span> Semantics<span style="color: #990000">:[</span>report<span style="color: #990000">]</span>
+Line<span style="color: #990000">[</span><span style="color: #993399">14</span><span style="color: #990000">]</span> Syntax<span style="color: #990000">:[[</span>N<span style="color: #990000">/</span>N<span style="color: #990000">]]</span> Semantics<span style="color: #990000">:[</span><span style="font-style: italic"><span style="color: #9A1900">#x.generate(x)]</span></span>
+Line<span style="color: #990000">[</span><span style="color: #993399">15</span><span style="color: #990000">]</span> Syntax<span style="color: #990000">:[[</span>N<span style="color: #990000">]]</span> Semantics<span style="color: #990000">:[</span>storage<span style="color: #990000">]</span>
+Line<span style="color: #990000">[</span><span style="color: #993399">16</span><span style="color: #990000">]</span> Syntax<span style="color: #990000">:[[</span>N<span style="color: #990000">]]</span> Semantics<span style="color: #990000">:[</span>preservation_attributes<span style="color: #990000">]</span>
+Line<span style="color: #990000">[</span><span style="color: #993399">17</span><span style="color: #990000">]</span> Syntax<span style="color: #990000">:[[</span>N<span style="color: #990000">]]</span> Semantics<span style="color: #990000">:[</span>ownership<span style="color: #990000">]</span>
+Line<span style="color: #990000">[</span><span style="color: #993399">18</span><span style="color: #990000">]</span> Syntax<span style="color: #990000">:[[</span>N<span style="color: #990000">]]</span> Semantics<span style="color: #990000">:[</span>rods<span style="color: #990000">]</span>
+Line<span style="color: #990000">[</span><span style="color: #993399">19</span><span style="color: #990000">]</span> Syntax<span style="color: #990000">:[[</span>N<span style="color: #990000">]]</span> Semantics<span style="color: #990000">:[</span>ownership<span style="color: #990000">]</span>
+Line<span style="color: #990000">[</span><span style="color: #993399">20</span><span style="color: #990000">]</span> Syntax<span style="color: #990000">:[[</span>N<span style="color: #990000">]]</span> Semantics<span style="color: #990000">:[</span>master_copy<span style="color: #990000">]</span>
+Line<span style="color: #990000">[</span><span style="color: #993399">21</span><span style="color: #990000">]</span> Syntax<span style="color: #990000">:[[</span>N<span style="color: #990000">]]</span> Semantics<span style="color: #990000">:[</span>file<span style="color: #990000">]</span>
+TestingProcess<span style="color: #990000">:</span> <span style="color: #993399">3</span> testing data read<span style="color: #990000">.</span>
+<span style="color: #990000">******</span>Parsing Sentences <span style="color: #990000">...</span>
+Parsing test sentence<span style="color: #990000">:</span> Rename collection
+Expected Representation<span style="color: #990000">:</span> command <span style="color: #990000">&gt;</span> <span style="font-weight: bold"><span style="color: #000000">rename</span></span><span style="color: #990000">(</span>collection<span style="color: #990000">)</span>
+Predicted Result<span style="color: #990000">:</span> command <span style="color: #990000">&gt;</span> <span style="font-weight: bold"><span style="color: #000000">rename</span></span><span style="color: #990000">(</span>collection<span style="color: #990000">)</span>
+Correct Prediction
+
+Parsing test sentence<span style="color: #990000">:</span> Print staff_experience report
+Expected Representation<span style="color: #990000">:</span> command <span style="color: #990000">&gt;</span> <span style="font-weight: bold"><span style="color: #0000FF">print</span></span><span style="color: #990000">(</span><span style="font-weight: bold"><span style="color: #000000">report</span></span><span style="color: #990000">(</span>staff_experience<span style="color: #990000">))</span>
+Predicted Result<span style="color: #990000">:</span> command <span style="color: #990000">&gt;</span> <span style="font-weight: bold"><span style="color: #0000FF">print</span></span><span style="color: #990000">(</span><span style="font-weight: bold"><span style="color: #000000">report</span></span><span style="color: #990000">(</span>staff_experience<span style="color: #990000">))</span>
+Correct Prediction
+
+Parsing test sentence<span style="color: #990000">:</span> file <span style="font-weight: bold"><span style="color: #0000FF">is</span></span> master_copy
+Expected Representation<span style="color: #990000">:</span> <span style="font-weight: bold"><span style="color: #000000">master_copy</span></span><span style="color: #990000">(</span>file<span style="color: #990000">)</span>
+Generalizing <span style="font-weight: bold"><span style="color: #0000FF">is</span></span> <span style="color: #990000">=</span> null
+Correct output does <span style="font-weight: bold"><span style="color: #0000FF">not</span></span> exist <span style="font-weight: bold"><span style="color: #0000FF">in</span></span> the parse result
+Predicted Result<span style="color: #990000">:</span>null
+Wrong Prediction
+
+Correct Predictions <span style="color: #990000">:</span> <span style="color: #993399">2</span><span style="color: #990000">/</span><span style="color: #993399">3</span>
+Incorrect Predictions <span style="color: #990000">:</span> <span style="color: #993399">0</span><span style="color: #990000">/</span><span style="color: #993399">3</span>
+Predictions <span style="font-weight: bold"><span style="color: #0000FF">for</span></span> sentences having unknown Expected Representations <span style="color: #990000">:</span> <span style="color: #993399">0</span><span style="color: #990000">/</span><span style="color: #993399">0</span>
+No Predictions <span style="color: #990000">:</span> <span style="color: #993399">1</span><span style="color: #990000">/</span><span style="color: #993399">3</span>
+Total evaluation costs<span style="color: #990000">:</span> 00h<span style="color: #990000">:</span>00m<span style="color: #990000">:</span>47s<span style="color: #990000">:</span>085ms</tt></pre></div></div>
 </div>
 </div>
 </div>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2013-11-17 15:12:02 MST
+Last updated 2013-11-17 15:47:09 MST
 </div>
 </div>
 </body>
