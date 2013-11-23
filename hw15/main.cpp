@@ -5,6 +5,10 @@
  * Copyright Jeremy Wright (c) 2013
  * Creative Commons Attribution-ShareAlike 3.0 Unported License.
  */
+#pragma GCC diagnostic ignored "-Wunused-variable"
+#pragma GCC diagnostic ignored "-Wreorder"
+#pragma GCC diagnostic ignored "-Wunused-but-set-variable"
+#pragma GCC diagnostic ignored "-Wparentheses"
 
 #include <boost/program_options.hpp>
 namespace po = boost::program_options;
@@ -16,7 +20,7 @@ namespace po = boost::program_options;
 // Only needed for showing which settings in use.
 
 #include <boost/quan/unc_init.hpp>
-
+#include <fstream>
 #include <iostream>
   using std::cout;
   using std::endl;
@@ -27,6 +31,8 @@ namespace po = boost::program_options;
   using std::sqrt;
 #include <string>
   using std::string;
+
+#include <regex>
 
 // using namespace boost::svg;
 // may be *very convenient* if using any SVG named colors,
@@ -88,6 +94,18 @@ int main(int argc, char* argv[])
     { 
         std::cout << desc << endl;
     } 
+
+    std::ifstream fin(filename);
+    string line;
+    while(fin >> line)
+    {
+        if(line == "l")
+            cout << "Lime" << endl;
+        if(line == "c")
+            cout << "cherry" << endl;
+    }
+
+    return 0;
 
 
 
