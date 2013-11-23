@@ -7,7 +7,7 @@ SET(CMAKE_CXX_FLAGS_RELEASE "-O2")
 
 include_directories(quan)
 include_directories(visualization)
-Find_Package(Boost)
+Find_Package(Boost COMPONENTS program_options system filesystem)
 include_directories(${Boost_INCLUDE_DIRS}) 
 add_executable(hw15 main.cpp) 
 target_link_libraries(hw15 ${Boost_LIBRARIES})     

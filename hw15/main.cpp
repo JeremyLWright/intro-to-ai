@@ -1,25 +1,14 @@
-/*! \file demo_2d_simple.cpp
-    \brief Demonstration of some simple 2D plot features.
-    \details Uses some simple math functions to generate curves.
-    This demonstrates plotting some simple math functions with most of the 2-D defaults,
-    just changing a few typical details.
-    The detailed output shows the plot settings for each plot.
-    See default_2d_plot.cpp for using \b all defaults.
-    See also demo_2d_plot.cpp for use of some of the very many options.
-    \date Feb 2009
-    \author Jacob Voytko and Paul A. Bristow 
-*/
+/**
+ * @brief CSE 471 Homework 15
+ *
+ * @par
+ * Copyright Jeremy Wright (c) 2013
+ * Creative Commons Attribution-ShareAlike 3.0 Unported License.
+ */
 
-// demo_2d_simple.cpp
-
-// Copyright Jacob Voytko 2007
-// Copyright Paul A. Bristow 2007, 2008, 2012
-
-// Use, modification and distribution are subject to the
-// Boost Software License, Version 1.0.
-// (See accompanying file LICENSE_1_0.txt
-// or copy at http://www.boost.org/LICENSE_1_0.txt)
-
+#include <boost/program_options.hpp>
+namespace po = boost::program_options;
+#include <boost/filesystem.hpp>
 #include <boost/svg_plot/svg_2d_plot.hpp>
   using boost::svg::svg_2d_plot;
 
@@ -65,8 +54,42 @@ double h(double x)
   return -1 + 2 * x;
 }
 
-int main()
+int main(int argc, char* argv[])
 {
+    std::string appName = boost::filesystem::basename(argv[0]); 
+    po::options_description desc("Options");
+    
+    std::string filename;
+    desc.add_options()
+        ("help,h", "This program accepts the name of a file.")
+        ("file,f", po::value<std::string>(), "new line delimited file.");
+    try
+    {
+        po::positional_options_description p;
+        p.add("file", -1);
+        
+        po::variables_map vm;
+        po::store(po::command_line_parser(argc, argv).options(desc).positional(p).run(), vm);
+        po::notify(vm);
+
+        if(vm.count("file"))
+        {
+            filename = vm["file"].as<std::string>();
+            cout << "Captured Section: " << filename << endl;
+        }
+        else
+        {
+            std::cout << desc << endl;
+            return 0;
+        }
+
+    }
+    catch(boost::program_options::required_option& e) 
+    { 
+        std::cout << desc << endl;
+    } 
+
+
 
   try
   {
