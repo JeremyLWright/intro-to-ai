@@ -1,0 +1,31 @@
+Probabiliy
+----------
+
+P(A) - probability A
+P(A, B) - Probabilit of A and B = P(A)*P(A|B)
+P(A v B) -  A or B = P(A) + P(B) - P(A,B)
+
+P(A) = P(A,B) + P(A, !B)
+
+Examples
+--------
+
+--------------------------------
+| A | B | C | Probability      |
+--------------------------------
+| T | T | T | 0.1 = P(A,B,C)   |
+| T | T | F | 0.2 = P(A,B, !C) |
+| T | F | T | 0.1              |
+| T | F | F | 0.3              |
+| F | T | T | 0.05             |
+| F | T | F | 0.05             |
+| F | F | T | 0.2              |
+| F | F | F | 0                |
+
+
+P(A)           = 0.1 + 0.2 + 0.1 + 0.3                   = 0.7
+P(A, C)        = 0.1 + 0.1                               = 0.2
+P(B|A)         = (0.1 + 0.2) / (0.7)                     = 0.3/0.7
+P(B| (A, !C) ) = "Where A & !C are true" ->              = 0.2 / 0.5
+P( (A,C) | B)  = "Where B is true, where are A & C true" = 0.1/0.4
+
