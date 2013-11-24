@@ -36,7 +36,8 @@ namespace po = boost::program_options;
 #include <string>
   using std::string;
 
-#include <regex>
+#include <boost/regex.hpp>
+
 
 // using namespace boost::svg;
 // may be *very convenient* if using any SVG named colors,
@@ -161,7 +162,7 @@ double p(Bag bag, data_type)
     return d;
 }
 
-
+// Calculates the probabilty the next candy will be a lime.
 double p(lime_type, data_type)
 {
     // 
@@ -224,20 +225,29 @@ int main(int argc, char* argv[])
 
     std::ifstream fin(filename);
     string line;
-    while(fin >> line)
+    boost::regex reg("c|l"); //Construct the regular expression here, since it's expensive
+    while(std::getline(fin,line))
     {
-        if(line == "l")
-            process(lime_type());
-        if(line == "c")
-            process(cherry_type());
+        string candy;
+        num_limes = 0;
+        num_cherries = 0;
+        boost::sregex_token_iterator pos(begin(line), end(line), reg);
+        boost::sregex_token_iterator end;
+        for( ; pos != end ; ++pos)
+        {
+            if(pos->str() == "l")
+                process(lime_type());
+            if(pos->str() == "c")
+                process(cherry_type());
+            
+            std::vector<double> prob(bags.size());
+            std::transform(std::begin(bags), std::end(bags), begin(prob), [](Bag b){ return  p(b, data_type()); });
+            cout << "{";
+            std::copy(std::begin(prob), std::end(prob), std::ostream_iterator<double>(cout, ", "));
+            cout << "}" << endl;
+        }
+        cout << endl;
         
-        std::vector<double> prob(bags.size());
-        std::transform(begin(bags), end(bags), begin(prob), [](Bag b){ return  p(b, data_type()); });
-        cout << "{";
-        std::copy(begin(prob), end(prob), std::ostream_iterator<double>(cout, ", "));
-        cout << "}" << endl;
-
-            //p(lime_type(), data_type()) << endl << endl;
     }
 
     return 0;
