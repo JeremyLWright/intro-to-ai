@@ -25,6 +25,7 @@ namespace po = boost::program_options;
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include <iterator>
   using std::cout;
   using std::endl;
   using std::boolalpha;
@@ -81,7 +82,7 @@ map<Bag, double> apriori{
 };
 
 map<Bag, std::pair<double, double>> candy_dist{
-        {Bag1, {1.00, 0.50}},
+        {Bag1, {1.00, 0.00}},
         {Bag2, {0.75, 0.25}},
         {Bag3, {0.50, 0.50}},
         {Bag4, {0.25, 0.75}},
@@ -229,7 +230,14 @@ int main(int argc, char* argv[])
             process(lime_type());
         if(line == "c")
             process(cherry_type());
-        cout << "Probability: " << p(lime_type(), data_type()) << endl << endl;
+        
+        std::vector<double> prob(bags.size());
+        std::transform(begin(bags), end(bags), begin(prob), [](Bag b){ return  p(b, data_type()); });
+        cout << "{";
+        std::copy(begin(prob), end(prob), std::ostream_iterator<double>(cout, ", "));
+        cout << "}" << endl;
+
+            //p(lime_type(), data_type()) << endl << endl;
     }
 
     return 0;
