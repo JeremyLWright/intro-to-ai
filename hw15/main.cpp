@@ -149,19 +149,23 @@ double p(lime_type, data_type)
 
 
 using dataset_t = std::vector<std::pair<double, double>>;
+using datasets_t = std::vector<std::pair<string, dataset_t>>;
 
-void plot(dataset_t dataset1, dataset_t dataset2, string filename)
+void plot(datasets_t datasets, string filename)
 {
     Gnuplot gp;
 	
 	gp << "set output '"<< filename << ".png'\n";
 	gp << "set xrange [0:12]\nset yrange [0:1]\n";
-    gp << "plot '-' with lines title '"<< filename << "'";
+    gp << "plot ";
+    for(auto dataset : datasets)
+        gp << "'-' with lines title '"<< dataset.first << "',";
 
-    gp << ",'-' with lines title '"<< filename << "2'\n";
-    gp.send1d(dataset1);
+    //gp << ",'-' with lines title '"<< filename << "2'\n";
+    for(auto points : datasets)
+        gp.send1d(points.second);
 
-    gp.send1d(dataset2);
+    //gp.send1d(dataset2);
 }
 
 
@@ -243,8 +247,14 @@ int main(int argc, char* argv[])
         //    cout << p.first << " : " << p.second << endl;
         //}
         //cout << endl;
+        datasets_t d{std::make_pair("H_1", h1),
+        std::make_pair("H_2", h2), 
+        std::make_pair("H_3", h3), 
+        std::make_pair("H_4", h4), 
+        std::make_pair("H_5", h5)};
+
         //plot(h1, string("H1_Line_")+std::to_string(lineno));
-        plot(h2, h3, string("H2_Line_")+std::to_string(lineno));
+        plot(d, string("Line")+std::to_string(lineno));
         //plot(h3, string("H3_Line_")+std::to_string(lineno));
         //plot(h4, string("H4_Line_")+std::to_string(lineno));
         //plot(h5, string("H5_Line_")+std::to_string(lineno));
