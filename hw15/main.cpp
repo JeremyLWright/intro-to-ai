@@ -107,7 +107,7 @@ void process(cherry_type)
 double p(lime_type, Bag bag)
 {
     double d = candy_dist.at(bag).second;
-    cout << "P(lime|Bag"<< bag << ")=" << d << "\n";
+    //cout << "P(lime|Bag"<< bag << ")=" << d << "\n";
     BOOST_VERIFY( d >= 0 && d <= 1 );
     return d;
 }
@@ -115,7 +115,7 @@ double p(lime_type, Bag bag)
 double p(cherry_type, Bag bag)
 {
     double d = candy_dist.at(bag).first;
-    cout << "P(cherry|Bag" << bag << ")=" << d << "\n";
+    //cout << "P(cherry|Bag" << bag << ")=" << d << "\n";
     BOOST_VERIFY( d >= 0 && d <= 1 );
     return d;
 }
@@ -123,7 +123,7 @@ double p(cherry_type, Bag bag)
 double p(Bag bag)
 {
     double d = apriori.at(bag); 
-    cout << "P(bag"<< bag << ")=" << d << "\n";
+  //  cout << "P(bag"<< bag << ")=" << d << "\n";
     BOOST_VERIFY( d >= 0 && d <= 1 );
     return d;
 }
@@ -131,7 +131,7 @@ double p(Bag bag)
 double p(data_type, Bag bag)
 {
     double d = pow(p(lime_type(), bag), num_limes) * pow(p(cherry_type(), bag), num_cherries);
-    cout << "P(data|bag"<< bag << ")=" << d << "\n";
+//    cout << "P(data|bag"<< bag << ")=" << d << "\n";
     BOOST_VERIFY( d >= 0 && d <= 1 );
     return d;
 }
@@ -139,8 +139,12 @@ double p(data_type, Bag bag)
 double p(data_type)
 {
     // p(data) = \Sigma_B ( p(data | B_i) * p(B_i)
-    double d = p(data_type(), Bag1) * p(Bag1);
-    cout << "P(data) " << d << "\n";
+    std::vector<double> partials(bags.size());
+    std::transform(begin(bags), end(bags), begin(partials), [](Bag b){ return  p(data_type(), b) * p(b); });
+
+    double d = std::accumulate(begin(partials), end(partials), 0.0 );
+    
+    //cout << "P(data) " << d << "\n";
     BOOST_VERIFY( d >= 0 && d <= 1 );
     return d;
 
@@ -151,7 +155,7 @@ double p(Bag bag, data_type)
 {
     // p(bag_i | Data) => p(data | bag_i)*p(bag_i)/p(data)
     double d = (p(data_type(), bag) * p(bag)) / p(data_type());
-    cout << "P(bag" << bag << "|data) " << d << "\n";
+    //cout << "P(bag" << bag << "|data) " << d << "\n";
     BOOST_VERIFY( d >= 0 && d <= 1 );
     return d;
 }
@@ -164,7 +168,7 @@ double p(lime_type, data_type)
     //
     std::vector<double> partials(bags.size());
     std::transform(begin(bags), end(bags), begin(partials), [](Bag b){ return  p(lime_type(), b)*p(b, data_type()); });
-    double a = std::accumulate(begin(partials), end(partials), 0 );
+    double a = std::accumulate(begin(partials), end(partials), 0.0 );
     BOOST_VERIFY( a >= 0 && a <= 1 );
     return a;
 
