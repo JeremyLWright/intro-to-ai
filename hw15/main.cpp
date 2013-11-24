@@ -5,22 +5,12 @@
  * Copyright Jeremy Wright (c) 2013
  * Creative Commons Attribution-ShareAlike 3.0 Unported License.
  */
-#pragma GCC diagnostic ignored "-Wunused-variable"
-#pragma GCC diagnostic ignored "-Wreorder"
-#pragma GCC diagnostic ignored "-Wunused-but-set-variable"
-#pragma GCC diagnostic ignored "-Wparentheses"
 
 #include <boost/program_options.hpp>
 namespace po = boost::program_options;
 #include <boost/filesystem.hpp>
-#include <boost/svg_plot/svg_2d_plot.hpp>
-  using boost::svg::svg_2d_plot;
-
-#include <boost/svg_plot/show_2d_settings.hpp>
-// Only needed for showing which settings in use.
-
-#include <boost/quan/unc_init.hpp>
 #include <boost/assert.hpp>
+#include <gnuplot-iostream/gnuplot-iostream.h>
 #include <fstream>
 #include <iostream>
 #include <vector>
@@ -37,33 +27,6 @@ namespace po = boost::program_options;
   using std::string;
 
 #include <boost/regex.hpp>
-
-
-// using namespace boost::svg;
-// may be *very convenient* if using any SVG named colors,
-// to avoid writing
-  using boost::svg::red;
-  using boost::svg::yellow;
-  using boost::svg::orange;
-  using boost::svg::blue;
-  // and other enum options used:
-  using boost::svg::square;
-  // for every color used.
-
-double f(double x)
-{
-  return sqrt(x);
-}
-
-double g(double x)
-{
-  return -2 + x*x;
-}
-
-double h(double x)
-{
-  return -1 + 2 * x;
-}
 
 enum Bag {
     Bag1 =1,
@@ -185,35 +148,63 @@ double p(lime_type, data_type)
 }
 
 
-using dataset_t = map<double, double>;
+using dataset_t = std::vector<std::pair<double, double>>;
 
 void plot(dataset_t dataset, string filename)
 {
-    svg_2d_plot my_plot;
-    // Uses most defaults, but scale settings are usually sensible.
+    Gnuplot gp;
+    
+    
+   	std::vector<std::pair<double, double> > xy_pts_B;
+	for(double alpha=0; alpha<1; alpha+=1.0/24.0) {
+		double theta = alpha*2.0*3.14159;
+		xy_pts_B.push_back(std::make_pair(cos(theta), sin(theta)));
+	}
 
-    // Add the data series to the plot:
-    my_plot.title(filename);
-    my_plot.x_label("X-axis").y_label("Y-axis"); // Note chaining.
-    my_plot.x_min(0);
-    my_plot.x_max(12);
+	std::cout << "Creating my_graph_2.png" << std::endl;
+	gp << "set output '"<< filename << ".png'\n";
+	gp << "set xrange [-2:12]\nset yrange [0:1]\n";
+    gp << "plot '-' with lines title '"<< filename << "'\n";
 
-
-    std::string s = my_plot.title();
-
-    my_plot.plot(dataset, filename).fill_color(red).bezier_on(true).line_color(blue);
-    //my_plot.plot(data2, "-2 + x^2").fill_color(orange).size(5);
-    //my_plot.plot(data3, "-1 + 2x").fill_color(yellow).bezier_on(true).line_color(blue).shape(square);
-    cout << " my_plot.title() " << my_plot.title() << endl;
-
-    my_plot.write(filename);
-    cout << " my_plot.title() " << my_plot.title() << endl;
-
-    show_2d_plot_settings(my_plot);
-
+    gp.send1d(dataset);
 }
 
+void demo_png() {
+	Gnuplot gp;
 
+	gp << "set terminal png\n";
+
+	std::vector<double> y_pts;
+	for(int i=0; i<1000; i++) {
+		double y = (i/500.0-1) * (i/500.0-1);
+		y_pts.push_back(y);
+	}
+
+	std::cout << "Creating my_graph_1.png" << std::endl;
+	gp << "set output 'my_graph_1.png'\n";
+	gp << "plot '-' with lines, sin(x/200) with lines\n";
+	gp.send1d(y_pts);
+
+	std::vector<std::pair<double, double> > xy_pts_A;
+	for(double x=-2; x<2; x+=0.01) {
+		double y = x*x*x;
+		xy_pts_A.push_back(std::make_pair(x, y));
+	}
+
+	std::vector<std::pair<double, double> > xy_pts_B;
+	for(double alpha=0; alpha<1; alpha+=1.0/24.0) {
+		double theta = alpha*2.0*3.14159;
+		xy_pts_B.push_back(std::make_pair(cos(theta), sin(theta)));
+	}
+
+	std::cout << "Creating my_graph_2.png" << std::endl;
+	gp << "set output 'my_graph_2.png'\n";
+	gp << "set xrange [-2:2]\nset yrange [-2:2]\n";
+    gp << "plot '-' with lines title 'cubic', '-' with points title 'circle'\n";
+
+    gp.send1d(xy_pts_A);
+    gp.send1d(xy_pts_B);
+}
 
 int main(int argc, char* argv[])
 {
@@ -252,15 +243,18 @@ int main(int argc, char* argv[])
     std::ifstream fin(filename);
     string line;
     boost::regex reg("c|l"); //Construct the regular expression here, since it's expensive
+    size_t lineno{0};
+
     while(std::getline(fin,line))
     {
+        ++lineno;
         string candy;
         num_limes = 0;
         num_cherries = 0;
         boost::sregex_token_iterator pos(begin(line), end(line), reg);
         boost::sregex_token_iterator end;
 
-        map<double, double> h1;
+        dataset_t h1;
         dataset_t h2;
         dataset_t h3;
         dataset_t h4;
@@ -274,181 +268,30 @@ int main(int argc, char* argv[])
 
             std::vector<double> prob(bags.size());
             std::transform(std::begin(bags), std::end(bags), begin(prob), [](Bag b){ return  p(b, data_type()); });
-            cout << "Sample: " << sample;
-            h1[sample] = f(sample); //prob[0];
-            h2[sample] = prob[1];
-            h3[sample] = prob[2];
-            h4[sample] = prob[3];
-            h5[sample] = prob[4];
+            //cout << "Sample: " << sample << ": " << prob[1] << '\n';
+            h1.push_back(std::make_pair(sample, prob[0]));
+            h2.push_back(std::make_pair(sample, prob[1]));
+            h3.push_back(std::make_pair(sample, prob[2]));
+            h4.push_back(std::make_pair(sample, prob[3]));
+            h5.push_back(std::make_pair(sample, prob[4]));
 
-            cout << "{";
-            std::copy(std::begin(prob), std::end(prob), std::ostream_iterator<double>(cout, ", "));
-            cout << "}" << endl;
+            //cout << "{";
+            //std::copy(std::begin(prob), std::end(prob), std::ostream_iterator<double>(cout, ", "));
+            //cout << "}" << endl;
         }
-        for(auto& p : h1)
-        {
-            cout << p.first << " : " << p.second << endl;
-        }
-        cout << endl;
-        plot(h1, "demo1234");
-        plot(h2, "H2");
-        plot(h3, "H3");
-        plot(h4, "H4");
-        plot(h5, "H5");
+        //for(auto& p : h2)
+        //{
+        //    cout << p.first << " : " << p.second << endl;
+        //}
+        //cout << endl;
+        plot(h1, string("H1_Line_")+std::to_string(lineno));
+        plot(h2, string("H2_Line_")+std::to_string(lineno));
+        plot(h3, string("H3_Line_")+std::to_string(lineno));
+        plot(h4, string("H4_Line_")+std::to_string(lineno));
+        plot(h5, string("H5_Line_")+std::to_string(lineno));
         cout << endl;
 
     }
 
-  return 0;
-} // int main()
-
-
-/*
-
-Output:
-
-Compiling...
-demo_2d_simple.cpp
-Linking...
-Embedding manifest...
-Autorun "j:\Cpp\SVG\debug\demo_2d_simple.exe"
- my_plot.title() demo_2d_simple title
- my_plot.title() demo_2d_simple title
- my_plot.title()
-axes_on true
-background_border_width 2
-background_border_color RGB(255,255,0)
-background_color RGB(255,255,255)
-image_border_margin() 10
-image_border_width() 2
-coord_precision 3
-copyright_date
-copyright_holder
-description
-document_title
-image_x_size 500
-image_y_size 400
-legend_on false
-legend_place 2
-legend_top_left -1, -1, legend_bottom_right -1, -1
-legend_background_color blank
-legend_border_color RGB(255,255,0)
-legend_color blank
-legend_title
-legend_title_font_size 14
-legend_font_weight
-legend_width 0
-legend_lines true
-license_on false
-license_reproduction permits
-license_distribution permits
-license_attribution requires
-license_commercialuse permits
-plot_background_color RGB(255,255,255)
-plot_border_color RGB(119,136,153)
-plot_border_width 2
-plot_window_on true
-plot_window_x 70.2, 488
-plot_window_x_left 70.2
-plot_window_x_right 488
-plot_window_y 57, 338
-plot_window_y_top 57
-plot_window_y_bottom 338.2
-title_on true
-title ""
-title_color blank
-title_font_alignment 2
-title_font_decoration
-title_font_family Verdana
-title_font_rotation 0
-title_font_size 18
-title_font_stretch
-title_font_style
-title_font_weight
-x_value_precision 3
-x_value_ioflags 200 IOS format flags (0x200) dec.
-y_value_precision 3
-y_value_ioflags 200 IOS format flags (0x200) dec.
-x_max 10
-x_min -10
-x_axis_on true
-x_axis_color() RGB(0,0,0)
-x_axis_label_color RGB(0,0,0)
-x_axis_value_color RGB(0,0,0)
-x_axis_width 1
-x_label_on true
-x_label X-axis
-x_label_color blank
-x_label_font_family Verdana
-x_label_font_size 14
-x_label_units
-x_label_units_on false
-x_major_labels_side left
-x_major_label_rotation 0
-x_major_grid_color RGB(200,220,255)
-x_major_grid_on false
-x_major_grid_width 1
-x_major_interval 2
-x_major_tick 2
-x_major_tick_color RGB(0,0,0)
-x_major_tick_length 5
-x_major_tick_width 2
-x_minor_interval 0
-x_minor_tick_color RGB(0,0,0)
-x_minor_tick_length 2
-x_minor_tick_width 1
-x_minor_grid_on false
-x_minor_grid_color RGB(200,220,255)
-x_minor_grid_width 0.5
-x_range() -10, 10
-x_num_minor_ticks 4
-x_ticks_down_on true
-x_ticks_up_on false
-x_ticks_on_window_or_axis bottom
-y_axis_position y_axis_position intersects X axis (X range includes zero)
-x_axis_position x_axis_position intersects Y axis (Y range includes zero)
-y_label_on true
-y_label_axis Y-axis
-y_axis_color RGB(0,0,0)
-y_axis_label_color RGB(0,0,0)
-y_axis_on true
-axes_on true
-y_axis_value_color RGB(0,0,0)
-y_axis_width 1
-y_label Y-axis
-y_label_color blank
-y_label_font_family Verdana
-y_label_font_size 14
-y_label_on true
-y_label_units
-y_label_units_on false
-y_label_width 0
-y_major_grid_on false
-y_major_grid_color RGB(200,220,255)
-y_major_grid_width 1
-y_major_interval 2
-y_major_labels_side bottom
-y_major_label_rotation 0
-y_major_tick_color RGB(0,0,0)
-y_major_tick_length  5
-y_major_tick_width  2
-y_minor_grid_on false
-y_minor_grid_color  RGB(200,220,255)
-y_minor_grid_width 0.5
-y_minor_interval 0
-y_minor_tick_color RGB(0,0,0)
-y_minor_tick_length 2
-y_minor_tick_width 1
-y_range() -10, 10
-y_num_minor_ticks
-y_ticks_left_on true
-y_ticks_right_on false
-y_ticks_on_window_or_axis left
-y_max 10
-y_min -10
-data lines width 2
-
-
-
-
-*/
+    return 0;
+}
