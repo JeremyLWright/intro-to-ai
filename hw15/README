@@ -1,0 +1,38 @@
+
+Create a Build folder
+jwright@jwright-LinuxAwesome:~/workspaces/school/cse471/hw15$ mkdir build
+jwright@jwright-LinuxAwesome:~/workspaces/school/cse471/hw15$ cd build
+
+Generate the make files
+jwright@jwright-LinuxAwesome:~/workspaces/school/cse471/hw15/build$ cmake ..
+-- The C compiler identification is GNU 4.7.2
+-- The CXX compiler identification is GNU 4.7.2
+-- Check for working C compiler: /usr/bin/cc
+-- Check for working C compiler: /usr/bin/cc -- works
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++
+-- Check for working CXX compiler: /usr/bin/c++ -- works
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Boost version: 1.49.0
+-- Found the following Boost libraries:
+--   program_options
+--   system
+--   filesystem
+--   regex
+--   iostreams
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/jwright/workspaces/school/cse471/hw15/build
+
+Build the project
+jwright@jwright-LinuxAwesome:~/workspaces/school/cse471/hw15/build$ make
+Scanning dependencies of target hw15
+[100%] Building CXX object CMakeFiles/hw15.dir/main.cpp.o
+Linking CXX executable hw15
+[100%] Built target hw15
+
+Run the executable against the desired datafile.
+jwright@jwright-LinuxAwesome:~/workspaces/school/cse471/hw15/build$ ./hw15 ../data2.txt 
+

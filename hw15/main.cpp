@@ -196,6 +196,7 @@ void plot(datasets_t datasets, string filename)
         ss << *i;
     }
 	
+    gp << "set term png\n"; 
     gp << "set output '"<< filename << ".png'\n";
 	gp << "set xrange [0:" << max_set << "]\nset yrange [0:1]\n";
     gp << "plot ";
@@ -205,6 +206,7 @@ void plot(datasets_t datasets, string filename)
     //gp << ",'-' with lines title '"<< filename << "2'\n";
     for(auto points : datasets)
         gp.send1d(points.second);
+    gp << '\n';
 
     //gp.send1d(dataset2);
 }
