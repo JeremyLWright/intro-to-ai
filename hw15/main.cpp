@@ -20,8 +20,11 @@ namespace po = boost::program_options;
 // Only needed for showing which settings in use.
 
 #include <boost/quan/unc_init.hpp>
+#include <boost/assert.hpp>
 #include <fstream>
 #include <iostream>
+#include <vector>
+#include <algorithm>
   using std::cout;
   using std::endl;
   using std::boolalpha;
@@ -60,11 +63,131 @@ double h(double x)
   return -1 + 2 * x;
 }
 
+enum Bag {
+    Bag1 =1,
+    Bag2,
+    Bag3,
+    Bag4,
+    Bag5};
+
+std::vector<Bag> const bags{Bag1, Bag2, Bag3, Bag4, Bag5};
+
+map<Bag, double> apriori{
+        {Bag1, 0.1},
+        {Bag2, 0.2},
+        {Bag3, 0.4},
+        {Bag4, 0.2},
+        {Bag5, 0.1}
+};
+
+map<Bag, std::pair<double, double>> candy_dist{
+        {Bag1, {1.00, 0.50}},
+        {Bag2, {0.75, 0.25}},
+        {Bag3, {0.50, 0.50}},
+        {Bag4, {0.25, 0.75}},
+        {Bag5, {0.00, 1.00}}
+};
+
+class lime_type{};
+class cherry_type{};
+class data_type{};
+
+size_t num_limes = 0;
+size_t num_cherries = 0;
+
+void process(lime_type)
+{
+    ++num_limes;
+}
+
+void process(cherry_type)
+{
+    ++num_cherries;
+}
+double p(lime_type, Bag bag)
+{
+    double d = candy_dist.at(bag).second;
+    cout << "P(lime|Bag"<< bag << ")=" << d << "\n";
+    BOOST_VERIFY( d >= 0 && d <= 1 );
+    return d;
+}
+
+double p(cherry_type, Bag bag)
+{
+    double d = candy_dist.at(bag).first;
+    cout << "P(cherry|Bag" << bag << ")=" << d << "\n";
+    BOOST_VERIFY( d >= 0 && d <= 1 );
+    return d;
+}
+
+double p(Bag bag)
+{
+    double d = apriori.at(bag); 
+    cout << "P(bag"<< bag << ")=" << d << "\n";
+    BOOST_VERIFY( d >= 0 && d <= 1 );
+    return d;
+}
+
+double p(data_type, Bag bag)
+{
+    double d = pow(p(lime_type(), bag), num_limes) * pow(p(cherry_type(), bag), num_cherries);
+    cout << "P(data|bag"<< bag << ")=" << d << "\n";
+    BOOST_VERIFY( d >= 0 && d <= 1 );
+    return d;
+}
+
+double p(data_type)
+{
+    // p(data) = \Sigma_B ( p(data | B_i) * p(B_i)
+    double d = p(data_type(), Bag1) * p(Bag1);
+    cout << "P(data) " << d << "\n";
+    BOOST_VERIFY( d >= 0 && d <= 1 );
+    return d;
+
+}
+
+
+double p(Bag bag, data_type)
+{
+    // p(bag_i | Data) => p(data | bag_i)*p(bag_i)/p(data)
+    double d = (p(data_type(), bag) * p(bag)) / p(data_type());
+    cout << "P(bag" << bag << "|data) " << d << "\n";
+    BOOST_VERIFY( d >= 0 && d <= 1 );
+    return d;
+}
+
+
+double p(lime_type, data_type)
+{
+    // 
+    // \sigma_bags(p(lime, Bag_i | data))
+    //
+    std::vector<double> partials(bags.size());
+    std::transform(begin(bags), end(bags), begin(partials), [](Bag b){ return  p(lime_type(), b)*p(b, data_type()); });
+    double a = std::accumulate(begin(partials), end(partials), 0 );
+    BOOST_VERIFY( a >= 0 && a <= 1 );
+    return a;
+
+    /*
+    p(lime_type(), Bag2)*p(Bag2, data_type()) +
+    p(lime_type(), Bag3)*p(Bag3, data_type()) +
+    p(lime_type(), Bag4)*p(Bag4, data_type()) +
+    p(lime_type(), Bag5)*p(Bag5, data_type());
+    */
+
+        
+}
+
+
+
+
+
+
 int main(int argc, char* argv[])
 {
     std::string appName = boost::filesystem::basename(argv[0]); 
     po::options_description desc("Options");
-    
+
     std::string filename;
     desc.add_options()
         ("help,h", "This program accepts the name of a file.")
@@ -73,7 +196,7 @@ int main(int argc, char* argv[])
     {
         po::positional_options_description p;
         p.add("file", -1);
-        
+
         po::variables_map vm;
         po::store(po::command_line_parser(argc, argv).options(desc).positional(p).run(), vm);
         po::notify(vm);
@@ -81,7 +204,6 @@ int main(int argc, char* argv[])
         if(vm.count("file"))
         {
             filename = vm["file"].as<std::string>();
-            cout << "Captured Section: " << filename << endl;
         }
         else
         {
@@ -100,54 +222,55 @@ int main(int argc, char* argv[])
     while(fin >> line)
     {
         if(line == "l")
-            cout << "Lime" << endl;
+            process(lime_type());
         if(line == "c")
-            cout << "cherry" << endl;
+            process(cherry_type());
+        cout << "Probability: " << p(lime_type(), data_type()) << endl << endl;
     }
 
     return 0;
 
 
 
-  try
-  {
-    // Some containers for (sorted) sample data.
-    map<double, double> data1;
-    map<double, double> data2;
-    map<double, double> data3;
+    try
+    {
+        // Some containers for (sorted) sample data.
+        map<double, double> data1;
+        map<double, double> data2;
+        map<double, double> data3;
 
-    for(double i = -5; i <= 10.; i += 1.)
-    { // Several data points for each function.
-      data1[i] = f(i);
-      data2[i] = g(i);
-      data3[i] = h(i);
-      // List if desired:
-      // cout << i << ' '<< data1[i] << ' ' << data2[i] << ' '<< data3[i] << endl;
+        for(double i = -5; i <= 10.; i += 1.)
+        { // Several data points for each function.
+            data1[i] = f(i);
+            data2[i] = g(i);
+            data3[i] = h(i);
+            // List if desired:
+            // cout << i << ' '<< data1[i] << ' ' << data2[i] << ' '<< data3[i] << endl;
+        }
+
+        setUncDefaults(std::cout);
+        svg_2d_plot my_plot;
+        // Uses most defaults, but scale settings are usually sensible.
+
+        // Add the data series to the plot:
+        my_plot.title("demo_2d_simple");
+        cout << " my_plot.title() " << my_plot.title() << endl;
+        my_plot.x_label("X-axis").y_label("Y-axis"); // Note chaining.
+
+        std::string s = my_plot.title();
+
+        my_plot.plot(data1, "Sqrt(x)").fill_color(red);
+        my_plot.plot(data2, "-2 + x^2").fill_color(orange).size(5);
+        my_plot.plot(data3, "-1 + 2x").fill_color(yellow).bezier_on(true).line_color(blue).shape(square);
+        cout << " my_plot.title() " << my_plot.title() << endl;
+
+        my_plot.write("./demo_2d_simple.svg");
+        cout << " my_plot.title() " << my_plot.title() << endl;
+
+        show_2d_plot_settings(my_plot);
     }
-
-    setUncDefaults(std::cout);
-    svg_2d_plot my_plot;
-    // Uses most defaults, but scale settings are usually sensible.
-
-    // Add the data series to the plot:
-    my_plot.title("demo_2d_simple");
-    cout << " my_plot.title() " << my_plot.title() << endl;
-    my_plot.x_label("X-axis").y_label("Y-axis"); // Note chaining.
-
-    std::string s = my_plot.title();
-
-    my_plot.plot(data1, "Sqrt(x)").fill_color(red);
-    my_plot.plot(data2, "-2 + x^2").fill_color(orange).size(5);
-    my_plot.plot(data3, "-1 + 2x").fill_color(yellow).bezier_on(true).line_color(blue).shape(square);
-    cout << " my_plot.title() " << my_plot.title() << endl;
-
-    my_plot.write("./demo_2d_simple.svg");
-    cout << " my_plot.title() " << my_plot.title() << endl;
-
-    show_2d_plot_settings(my_plot);
-  }
-  catch(const std::exception& e)
-  {
+    catch(const std::exception& e)
+    {
     std::cout <<
       "\n""Message from thrown exception was:\n  " << e.what() << std::endl;
   }
