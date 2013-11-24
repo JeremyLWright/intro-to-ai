@@ -16,6 +16,8 @@ namespace po = boost::program_options;
 #include <vector>
 #include <algorithm>
 #include <iterator>
+#include <sstream>
+#include "prettyprint.hpp"
   using std::cout;
   using std::endl;
   using std::boolalpha;
@@ -158,9 +160,27 @@ void plot(datasets_t datasets, string filename)
 	gp << "set output '"<< filename << ".png'\n";
 	gp << "set xrange [0:12]\nset yrange [0:1]\n";
     gp << "plot ";
-    for(auto dataset : datasets)
-        gp << "'-' with lines title '"<< dataset.first << "',";
 
+    std::vector<string> plot_commands;
+    for(auto dataset : datasets)
+    {
+        std::stringstream ss;
+        ss << "'-' with lines title '"<< dataset.first << "'";
+        plot_commands.push_back(ss.str());
+    }
+    
+    std::stringstream ss;
+    for (auto i = plot_commands.begin(); i != plot_commands.end(); ++i) 
+    {
+        if (i != plot_commands.begin()) ss << ", ";
+        ss << *i;
+    }
+    gp << ss.str();
+
+   // gp << plot_commands;
+    //std::copy(begin(plot_commands), end(plot_commands), gp);
+    gp << '\n';
+    
     //gp << ",'-' with lines title '"<< filename << "2'\n";
     for(auto points : datasets)
         gp.send1d(points.second);
