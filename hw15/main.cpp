@@ -149,6 +149,27 @@ double p(lime_type, data_type)
         
 }
 
+double p(cherry_type, data_type)
+{
+    // 
+    // \sigma_bags(p(lime, Bag_i | data))
+    //
+    std::vector<double> partials(bags.size());
+    std::transform(begin(bags), end(bags), begin(partials), [](Bag b){ return  p(cherry_type(), b)*p(b, data_type()); });
+    double a = std::accumulate(begin(partials), end(partials), 0.0 );
+    BOOST_VERIFY( a >= 0 && a <= 1 );
+    return a;
+
+    /*
+    p(lime_type(), Bag2)*p(Bag2, data_type()) +
+    p(lime_type(), Bag3)*p(Bag3, data_type()) +
+    p(lime_type(), Bag4)*p(Bag4, data_type()) +
+    p(lime_type(), Bag5)*p(Bag5, data_type());
+    */
+
+        
+}
+
 
 using dataset_t = std::vector<std::pair<double, double>>;
 using datasets_t = std::vector<std::pair<string, dataset_t>>;
@@ -260,6 +281,7 @@ int main(int argc, char* argv[])
             h4.push_back(std::make_pair(sample, prob[3]));
             h5.push_back(std::make_pair(sample, prob[4]));
             plime.push_back(std::make_pair(sample, p(lime_type(), data_type())));
+            pcherry.push_back(std::make_pair(sample, p(cherry_type(), data_type())));
 
             //cout << "{";
             //std::copy(std::begin(prob), std::end(prob), std::ostream_iterator<double>(cout, ", "));
@@ -275,7 +297,8 @@ int main(int argc, char* argv[])
         std::make_pair("H_3", h3), 
         std::make_pair("H_4", h4), 
         std::make_pair("H_5", h5),
-        std::make_pair("P(lime | D)", plime)};
+        std::make_pair("P(lime | D)", plime),
+        std::make_pair("P(cherry | D)", pcherry)};
 
         //plot(h1, string("H1_Line_")+std::to_string(lineno));
         plot(d, string("Line")+std::to_string(lineno));
