@@ -185,7 +185,33 @@ double p(lime_type, data_type)
 }
 
 
+using dataset_t = map<double, double>;
 
+void plot(dataset_t dataset, string filename)
+{
+    svg_2d_plot my_plot;
+    // Uses most defaults, but scale settings are usually sensible.
+
+    // Add the data series to the plot:
+    my_plot.title(filename);
+    my_plot.x_label("X-axis").y_label("Y-axis"); // Note chaining.
+    my_plot.x_min(0);
+    my_plot.x_max(12);
+
+
+    std::string s = my_plot.title();
+
+    my_plot.plot(dataset, filename).fill_color(red).bezier_on(true).line_color(blue);
+    //my_plot.plot(data2, "-2 + x^2").fill_color(orange).size(5);
+    //my_plot.plot(data3, "-1 + 2x").fill_color(yellow).bezier_on(true).line_color(blue).shape(square);
+    cout << " my_plot.title() " << my_plot.title() << endl;
+
+    my_plot.write(filename);
+    cout << " my_plot.title() " << my_plot.title() << endl;
+
+    show_2d_plot_settings(my_plot);
+
+}
 
 
 
@@ -233,69 +259,46 @@ int main(int argc, char* argv[])
         num_cherries = 0;
         boost::sregex_token_iterator pos(begin(line), end(line), reg);
         boost::sregex_token_iterator end;
-        for( ; pos != end ; ++pos)
+
+        map<double, double> h1;
+        dataset_t h2;
+        dataset_t h3;
+        dataset_t h4;
+        dataset_t h5;
+        for(size_t sample = 0 ; pos != end ; ++pos, ++sample)
         {
             if(pos->str() == "l")
                 process(lime_type());
             if(pos->str() == "c")
                 process(cherry_type());
-            
+
             std::vector<double> prob(bags.size());
             std::transform(std::begin(bags), std::end(bags), begin(prob), [](Bag b){ return  p(b, data_type()); });
+            cout << "Sample: " << sample;
+            h1[sample] = f(sample); //prob[0];
+            h2[sample] = prob[1];
+            h3[sample] = prob[2];
+            h4[sample] = prob[3];
+            h5[sample] = prob[4];
+
             cout << "{";
             std::copy(std::begin(prob), std::end(prob), std::ostream_iterator<double>(cout, ", "));
             cout << "}" << endl;
         }
-        cout << endl;
-        
-    }
-
-    return 0;
-
-
-
-    try
-    {
-        // Some containers for (sorted) sample data.
-        map<double, double> data1;
-        map<double, double> data2;
-        map<double, double> data3;
-
-        for(double i = -5; i <= 10.; i += 1.)
-        { // Several data points for each function.
-            data1[i] = f(i);
-            data2[i] = g(i);
-            data3[i] = h(i);
-            // List if desired:
-            // cout << i << ' '<< data1[i] << ' ' << data2[i] << ' '<< data3[i] << endl;
+        for(auto& p : h1)
+        {
+            cout << p.first << " : " << p.second << endl;
         }
+        cout << endl;
+        plot(h1, "demo1234");
+        plot(h2, "H2");
+        plot(h3, "H3");
+        plot(h4, "H4");
+        plot(h5, "H5");
+        cout << endl;
 
-        setUncDefaults(std::cout);
-        svg_2d_plot my_plot;
-        // Uses most defaults, but scale settings are usually sensible.
-
-        // Add the data series to the plot:
-        my_plot.title("demo_2d_simple");
-        cout << " my_plot.title() " << my_plot.title() << endl;
-        my_plot.x_label("X-axis").y_label("Y-axis"); // Note chaining.
-
-        std::string s = my_plot.title();
-
-        my_plot.plot(data1, "Sqrt(x)").fill_color(red);
-        my_plot.plot(data2, "-2 + x^2").fill_color(orange).size(5);
-        my_plot.plot(data3, "-1 + 2x").fill_color(yellow).bezier_on(true).line_color(blue).shape(square);
-        cout << " my_plot.title() " << my_plot.title() << endl;
-
-        my_plot.write("./demo_2d_simple.svg");
-        cout << " my_plot.title() " << my_plot.title() << endl;
-
-        show_2d_plot_settings(my_plot);
     }
-    catch(const std::exception& e)
-    {
-    std::cout <<
-      "\n""Message from thrown exception was:\n  " << e.what() << std::endl;
-  }
+
   return 0;
 } // int main()
 
