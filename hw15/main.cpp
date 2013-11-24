@@ -178,28 +178,28 @@ void plot(datasets_t datasets, string filename)
 {
     Gnuplot gp;
 	
-	gp << "set output '"<< filename << ".png'\n";
-	gp << "set xrange [0:12]\nset yrange [0:1]\n";
-    gp << "plot ";
-
     std::vector<string> plot_commands;
+    size_t max_set{0};
     for(auto dataset : datasets)
     {
         std::stringstream ss;
         ss << "'-' with lines title '"<< dataset.first << "'";
         plot_commands.push_back(ss.str());
+        max_set = dataset.second.size() > max_set ? dataset.second.size() : max_set;
     }
-    
+   
+    //Make comma separated.
     std::stringstream ss;
     for (auto i = plot_commands.begin(); i != plot_commands.end(); ++i) 
     {
         if (i != plot_commands.begin()) ss << ", ";
         ss << *i;
     }
+	
+    gp << "set output '"<< filename << ".png'\n";
+	gp << "set xrange [0:" << max_set << "]\nset yrange [0:1]\n";
+    gp << "plot ";
     gp << ss.str();
-
-   // gp << plot_commands;
-    //std::copy(begin(plot_commands), end(plot_commands), gp);
     gp << '\n';
     
     //gp << ",'-' with lines title '"<< filename << "2'\n";
@@ -292,11 +292,12 @@ int main(int argc, char* argv[])
         //    cout << p.first << " : " << p.second << endl;
         //}
         //cout << endl;
-        datasets_t d{std::make_pair("H_1", h1),
-        std::make_pair("H_2", h2), 
-        std::make_pair("H_3", h3), 
-        std::make_pair("H_4", h4), 
-        std::make_pair("H_5", h5),
+        datasets_t d{
+        std::make_pair("P(Bag1 | D)", h1),
+        std::make_pair("P(Bag2 | D)", h2), 
+        std::make_pair("P(Bag3 | D)", h3), 
+        std::make_pair("P(Bag4 | D)", h4), 
+        std::make_pair("P(Bag5 | D)", h5),
         std::make_pair("P(lime | D)", plime),
         std::make_pair("P(cherry | D)", pcherry)};
 
