@@ -242,6 +242,8 @@ int main(int argc, char* argv[])
         dataset_t h3;
         dataset_t h4;
         dataset_t h5;
+        dataset_t plime;
+        dataset_t pcherry;
         for(size_t sample = 0 ; pos != end ; ++pos, ++sample)
         {
             if(pos->str() == "l")
@@ -257,6 +259,7 @@ int main(int argc, char* argv[])
             h3.push_back(std::make_pair(sample, prob[2]));
             h4.push_back(std::make_pair(sample, prob[3]));
             h5.push_back(std::make_pair(sample, prob[4]));
+            plime.push_back(std::make_pair(sample, p(lime_type(), data_type())));
 
             //cout << "{";
             //std::copy(std::begin(prob), std::end(prob), std::ostream_iterator<double>(cout, ", "));
@@ -271,7 +274,8 @@ int main(int argc, char* argv[])
         std::make_pair("H_2", h2), 
         std::make_pair("H_3", h3), 
         std::make_pair("H_4", h4), 
-        std::make_pair("H_5", h5)};
+        std::make_pair("H_5", h5),
+        std::make_pair("P(lime | D)", plime)};
 
         //plot(h1, string("H1_Line_")+std::to_string(lineno));
         plot(d, string("Line")+std::to_string(lineno));
