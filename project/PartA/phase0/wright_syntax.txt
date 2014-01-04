@@ -1,0 +1,20 @@
+Rename	(N/N)
+data	(N)
+Print	(N/N)
+financial	(N/N)
+audit_report	(N)
+Generate	(N/N)
+report	(N)
+listing	((S\\NP)/NP)
+all	(NP/N)
+preservation_attributes	(N)
+Transfer	(N/N)
+data	(N/N)
+to	(N/N)
+new	(N/N)
+storage	(N)
+Generate	(N/N)
+report	N
+on	((N\\N)/NP)
+risk	N
+

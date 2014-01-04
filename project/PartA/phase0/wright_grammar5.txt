@@ -1,0 +1,3 @@
+sentence=Generate report on risk
+syntaxFile=./examples/sample/syntax.txt
+

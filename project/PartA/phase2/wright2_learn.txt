@@ -1,0 +1,1 @@
+Rename collection	command > rename(collection)

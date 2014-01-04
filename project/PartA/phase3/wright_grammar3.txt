@@ -1,0 +1,2 @@
+sentence=Generate report listing all preservation_attributes
+syntaxFile=./examples/sample/syntax.txt

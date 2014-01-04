@@ -1,0 +1,4 @@
+Ldata=../PartA/sample_train.txt
+Ldictionary=../PartA/sample_dict.txt
+Lsyntax=../PartA/sample_syntax.txt
+Loutput=../PartA/sample_policy_out.txt

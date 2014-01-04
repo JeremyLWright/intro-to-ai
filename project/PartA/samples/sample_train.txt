@@ -1,0 +1,5 @@
+Generate audit_trail for all changes to rules	command > generate(audit_trail(changes(rules)))
+Generate report listing all preservation_attributes	command > generate(report) ^ list(report,preservation_attributes)
+List all people with access_permissions on collection	command > list(people) ^ have(people,access_permission(collection))
+Print staff_experience report	command > print(report(staff_experience))
+List formally_accepted_files	command > list(formally_accepted_files)

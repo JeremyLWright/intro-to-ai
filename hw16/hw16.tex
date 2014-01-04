@@ -1,0 +1,185 @@
+% --------------------------------------------------------------
+% This is all preamble stuff that you don't have to worry about.
+% Head down to where it says "Start here"
+% --------------------------------------------------------------
+ 
+\documentclass[12pt]{article}
+ 
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb,algpseudocode,listings}
+\usepackage{color}
+\usepackage{DejaVuSansMono} 
+\usepackage{setspace}
+\usepackage{parskip}
+\usepackage{graphicx}
+
+
+\definecolor{Code}{rgb}{0,0,0}
+\definecolor{Decorators}{rgb}{0.5,0.5,0.5}
+\definecolor{Numbers}{rgb}{0.5,0,0}
+\definecolor{MatchingBrackets}{rgb}{0.25,0.5,0.5}
+\definecolor{Keywords}{rgb}{0,0,1}
+\definecolor{self}{rgb}{0,0,0}
+\definecolor{Strings}{rgb}{0,0.63,0}
+\definecolor{Comments}{rgb}{0,0.63,1}
+\definecolor{Backquotes}{rgb}{0,0,0}
+\definecolor{Classname}{rgb}{0,0,0}
+\definecolor{FunctionName}{rgb}{0,0,0}
+\definecolor{Operators}{rgb}{0,0,0}
+\definecolor{Background}{rgb}{0.98,0.98,0.98}
+
+\lstnewenvironment{python}[1][]{
+\lstset{
+numbers=left,
+numberstyle=\ttfamily,
+numbersep=1em,
+xleftmargin=1em,
+framextopmargin=2em,
+framexbottommargin=2em,
+showspaces=false,
+showtabs=false,
+showstringspaces=false,
+frame=l,
+tabsize=4,
+% Basic
+basicstyle=\ttfamily\small\setstretch{1},
+backgroundcolor=\color{Background},
+language=Python,
+% Comments
+commentstyle=\color{Comments}\slshape,
+% Strings
+stringstyle=\color{Strings},
+morecomment=[s][\color{Strings}]{"""}{"""},
+morecomment=[s][\color{Strings}]{'''}{'''},
+% keywords
+morekeywords={import,from,class,def,for,while,if,is,in,elif,else,not,and,or,print,break,continue,return,True,False,None,access,as,,del,except,exec,finally,global,import,lambda,pass,print,raise,try,assert},
+keywordstyle={\color{Keywords}\bfseries},
+% additional keywords
+morekeywords={[2]@invariant},
+keywordstyle={[2]\color{Decorators}\slshape},
+emph={self},
+emphstyle={\color{self}\slshape},
+%
+}}{}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+ 
+\newenvironment{theorem}[2][Theorem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{lemma}[2][Lemma]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{exercise}[2][Exercise]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{question}[2][Question]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{corollary}[2][Corollary]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+
+\lstset{basicstyle=\footnotesize\ttfamily,breaklines=true}
+\lstset{framextopmargin=50pt,frame=bottomline}
+
+\begin{document}
+ 
+% --------------------------------------------------------------
+%                         Start here
+% --------------------------------------------------------------
+ 
+\title{Homework 1}%replace X with the appropriate number
+\author{Jeremy Wright\\ %replace with your name
+CSE571 - Artificial Intelligence} %if necessary, replace with your course title
+ 
+\maketitle
+\begin{problem}{1}
+ 
+Using the Initial values provided, calculate all join probabilities.
+
+\begin{tabular}{|l|l|l|l|}
+        \hline
+        Joint Probability & Expansion  & Initial Result & X Counts\\
+        \hline
+        \hline
+        P(Cherry, Red, H, B=1)    & $ \theta \theta_{W1} \theta_{H1} \theta_{F1}$                             & 0.0864 & 189\\ \hline
+        P(Cherry, Red, H, B=2)    & $ (1-\theta) \theta_{W2} \theta_{H2}       \theta_{F2}$                   & 0.384  & 84\\ \hline
+        P(Cherry, Red, !H, B=1)   & $ \theta \theta_{W1} (1-\theta_{H1})       \theta_{F1}$                   & 0.1296 & 64.38\\ \hline
+        P(Cherry, Red, !H, B=2)   & $ (1-\theta) \theta_{W1} (1-\theta_{H2})       \theta_{F2}$               & 0.0576 & 28.61\\ \hline
+        P(Cherry, Green, H, B=1)  & $ \theta (1-\theta_{W1}) \theta_{H1}       \theta_{F1}$                   & 0.0576 & 52\\ \hline
+        P(Cherry, Green, H, B=2)  & $ (1-\theta) (1-\theta_{W2}) \theta_{H2}       \theta_{F2}$               & 0.0576 & 52\\ \hline
+        P(Cherry, Green, !H, B=1) & $ \theta (1-\theta_{W1}) (1-\theta_{H1})       \theta_{F1}$               & 0.0864 & 45\\ \hline
+        P(Cherry, Green, !H, B=2) & $ (1-\theta) (1-\theta_{W2}) (1-\theta_{H2})       \theta_{F2}$           & 0.0864 & 45\\ \hline
+        P(Lime, Red, H, B=1)      & $ \theta \theta_{W1} \theta_{H1}      (1-\theta_{F1})$                    & 0.0576 & 54.69\\ \hline
+        P(Lime, Red, H, B=2)      & $ (1-\theta) \theta_{W2} \theta_{H2}(1-\theta_{F2})$                      & 0.0256 & 24.30\\ \hline
+        P(Lime, Red, !H, B=1)     & $ \theta \theta_{W1} (1-\theta_{H1})     (1-\theta_{F1})$                 & 0.0864 & 69.23\\ \hline
+        P(Lime, Red, !H, B=2)     & $ (1-\theta) \theta_{W2} (1-\theta_{H2}) (1-\theta_{F2})$                 & 0.0384 & 30.76\\ \hline
+        P(Lime, Green, H, B=1)    & $ \theta (1-\theta_{W1}) \theta_{H1}    (1-\theta_{F1})$                  & 0.0384 & 47\\ \hline
+        P(Lime, Green, H, B=2)    & $ (1-\theta) (1-\theta_{W2}) \theta_{H2} (1-\theta_{F2})$                 & 0.0384 & 47\\ \hline
+        P(Lime, Green, !H, B=1)   & $ \theta (1-\theta_{W1}) (1-\theta_{H1})(1-\theta_{F1})$                  & 0.0576 & 83.5\\ \hline
+        P(Lime, Green, !H, B=2)   & $ (1-\theta) (1-\theta_{W2}) (1-\theta_{H2})(1-\theta_{F2})$              & 0.0576 & 83.5\\ \hline
+    \end{tabular}
+
+    We can then proceed with the E step, to calculate all the new theta values.
+
+\begin{tabular}{|l|c|l|}
+        \hline
+        Next $\theta$ Value & X Expansion & Initial Result\\
+        \hline
+        \hline
+        $ \theta^1 $      & $\dfrac{x_1 + x_3 + x_5 + x_7 + x_{11} + x_{13} + x_{15}}{x_1+x_2+\dots+x_{16}}$ & 0.604\\ \hline
+        $ \theta_{F1}^1 $ & $\dfrac{x_1+x_3 + x_5+x_7 }{x_1+x_2+\dots+x_{8} }$                               & 0.625\\ \hline
+        $ \theta_{F2}^1 $ & $\dfrac{x_2+x_4+x_8}{ x_1+x_2+\dots+x_{8}}$                                      & 0.374\\ \hline
+        $ \theta_{W1}^1 $ & $\dfrac{x_1+x_3+x_9+x_{11} }{x_1 +\dots+x_4 + x_9+\dots+x_{12} }$                & 0.692\\ \hline
+        $ \theta_{W2}^1 $ & $\dfrac{x_2+x_4+x_{10}+x_{12} }{x_1 +\dots+x_4 + x_9+\dots+x_{12} }$             & 0.307\\ \hline
+        $ \theta_{H1}^1 $ & $\dfrac{x_1+x_5+x_9+x_{13} }{ x_1+x_2+x_5+x_6+x_9+x_{10}+x_{13}+x_{14}}$         & 0.623\\ \hline
+        $ \theta_{H2}^1 $ & $\dfrac{x_2+x_6+x_{10} + x_{14}}{x_1+x_2+x_5+x_6+x_9+x_{10}+x_{13}+x_{14} }$     & 0.376\\ \hline
+    \end{tabular}
+
+    With the new theta values, we can continue in this fashion until we minimize all $\theta^0 - \theta_1$. Excel's Genetic Solver can do this effectively
+    and results in the following table.
+
+    \begin{tabular}{|l|c|}
+        \hline
+        Next $\theta$ Value & Iterated Result\\
+        \hline
+        \hline
+        $ \theta^1 $      &  0.504\\ \hline
+        $ \theta_{F1}^1 $ &  0.416\\ \hline
+        $ \theta_{F2}^1 $ &  0.264\\ \hline
+        $ \theta_{W1}^1 $ &  0.281\\ \hline
+        $ \theta_{W2}^1 $ &  0.744\\ \hline
+        $ \theta_{H1}^1 $ &  0.561\\ \hline
+        $ \theta_{H2}^1 $ &  0.410\\ \hline
+    \end{tabular}
+
+    Lastly, using the iterated theta values, we result in the following counts of candy. This represents the most likely split of candies from each bag.
+
+\begin{tabular}{|l|l|l|}
+        \hline
+        Joint Probability & Final Result & X Counts\\
+        \hline
+        \hline
+        P(Cherry, Red, H, B=1)    &  0.033 & 123.54\\ \hline
+        P(Cherry, Red, H, B=2)    &  0.040 & 149.45\\ \hline
+        P(Cherry, Red, !H, B=1)   &  0.025 & 28.85\\ \hline
+        P(Cherry, Red, !H, B=2)   &  0.057 & 64.12\\ \hline
+        P(Cherry, Green, H, B=1)  &  0.084 & 89.42\\ \hline
+        P(Cherry, Green, H, B=2)  &  0.013 & 14.57\\ \hline
+        P(Cherry, Green, !H, B=1) &  0.066 & 69.25\\ \hline
+        P(Cherry, Green, !H, B=2) &  0.019 & 20.74\\ \hline
+        P(Lime, Red, H, B=1)      &  0.046 & 23.27\\ \hline
+        P(Lime, Red, H, B=2)      &  0.111 & 55.72\\ \hline
+        P(Lime, Red, !H, B=1)     &  0.036 & 18.51\\ \hline
+        P(Lime, Red, !H, B=2)     &  0.159 & 81.48\\ \hline
+        P(Lime, Green, H, B=1)    &  0.118 & 71.07\\ \hline
+        P(Lime, Green, H, B=2)    &  0.382 & 22.92\\ \hline
+        P(Lime, Green, !H, B=1)   &  0.092 & 104.84\\ \hline
+        P(Lime, Green, !H, B=2)   &  0.055 & 62.15\\ \hline
+    \end{tabular}
+
+
+
+\end{problem}
+
+\end{document}

@@ -1,0 +1,18 @@
+Rename	[N/N]	#x.rename(x)
+data	[N]	data
+Print	[N/N]	#x.print(x)
+financial	[N/N]	financial
+audit_report	[N]	#x.audit_report(x)
+Generate	[N/N]	#x.generate(x)
+report	[N]	report
+listing	[S\NP]NP	#x.list(x)
+all	[NP/N]	
+preservation_attributes	[N]	preservation_attributes
+Transfer	[N/N]	#x.#y.transfer(x,y)
+data	[N/N]	data
+to	[N/N]	to
+new	[N/N]	new
+storage	[N]	storage
+report	N	report
+on	[N\N]NP
+risk	N	risk

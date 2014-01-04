@@ -1,0 +1,3 @@
+Rename collection	command > rename(collection)
+Print staff_experience report	command > print(report(staff_experience))
+Transfer ownership to rods	command > transfer(ownership, rods)

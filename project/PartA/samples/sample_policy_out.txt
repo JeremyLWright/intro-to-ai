@@ -1,0 +1,27 @@
+to	[(NP/NP)\NP]	#x.x	0.01
+with	[((S\NP)\(S\NP))/NP]	#x2.#x1.x1 ^ have(people,x2)	0.010112088
+for	[(N\N)/NP]	#x2.#x1.x1 @ x2	0.009937487
+for	[(NP\NP)/NP]	#x2.#x1.x1 @ x2	0.009939048
+staff_experience	[NP/N]	#x1.x1 @ staff_experience	0.0101239635
+staff_experience	[NP/N]	staff_experience	0.01
+collection	[N]	collection	0.007446803
+people	[N]	people	0.01
+rules	[N]	rules	0.01
+Print	[S/NP]	#x.command > print(x)	0.01
+Print	[(S\NP)/NP]	#x.command > print(x)	0.01
+formally_accepted_files	[N]	formally_accepted_files	0.01
+access_permissions	[N]	#x.access_permissions(x)	-0.039772958
+access_permissions	[N]	#x.access_permission(x)	0.0599002
+access_permissions	[N]	access_permissions	0.01
+listing	[(((S\NP)\((S\NP)/NP))/NP)\NP]	#x3.#x2.#x1.x1 @ x3 ^ list(x3,x2)	0.009875348
+audit_trail	[N]	#x.audit_trail(x)	0.01
+report	[N]	#x.report(x)	0.012388367
+report	[N]	report	0.007611636
+on	[(NP/NP)\NP]	#x.x	0.010124504
+List	[(S\NP)/N]	#x.command > list(x)	0.01
+Generate	[(S\NP)/NP]	#x.command > generate(x)	0.01
+all	[N/N]	#x.x	0.01
+changes	[N]	#x.change(x)	-0.04
+changes	[N]	changes	0.01
+changes	[N]	#x.changes(x)	0.060000002
+preservation_attributes	[N]	preservation_attributes	0.01
